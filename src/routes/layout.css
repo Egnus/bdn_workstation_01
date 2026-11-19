@@ -1,0 +1,104 @@
+@import 'tailwindcss';
+
+@theme {
+	--color-paper: #f3f0e8;
+	--color-paper-elevated: #f8f6ef;
+	--color-paper-inset: #eae5da;
+	--color-charcoal: #20231f;
+	--color-charcoal-muted: #4b5048;
+	--color-volcanic: #75806b;
+	--color-volcanic-deep: #464e40;
+	--color-clay: #d68a50;
+	--color-clay-hover: #c5783d;
+	--color-sand: #c6bba8;
+
+	--font-display: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+	--font-sans: 'Manrope Variable', 'Manrope', system-ui, -apple-system, sans-serif;
+	--font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+@layer base {
+	html {
+		background-color: var(--color-paper);
+		color: var(--color-charcoal);
+		font-family: var(--font-sans);
+		font-size: 100%;
+		scroll-behavior: smooth;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	body {
+		margin: 0;
+		background-color: var(--color-paper);
+		color: var(--color-charcoal);
+		line-height: 1.6;
+		overflow-x: clip;
+	}
+
+	::selection {
+		background-color: var(--color-clay);
+		color: var(--color-charcoal);
+	}
+
+	:focus-visible {
+		outline: 2px solid var(--color-charcoal);
+		outline-offset: 3px;
+	}
+
+	::-webkit-scrollbar {
+		width: 10px;
+	}
+
+	::-webkit-scrollbar-track {
+		background: var(--color-paper);
+	}
+
+	::-webkit-scrollbar-thumb {
+		background: var(--color-sand);
+		border: 2px solid var(--color-paper);
+	}
+
+	::-webkit-scrollbar-thumb:hover {
+		background: var(--color-volcanic);
+	}
+}
+
+.hairline-rule {
+	transform-origin: left center;
+	transition:
+		transform 700ms cubic-bezier(0.22, 1, 0.36, 1),
+		opacity 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hairline-rule[data-hairline='pending'] {
+	transform: scaleX(0.35);
+	opacity: 0.4;
+}
+
+.hairline-rule[data-hairline='visible'] {
+	transform: scaleX(1);
+	opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+
+	.hairline-rule,
+	.hairline-rule[data-hairline='pending'],
+	.hairline-rule[data-hairline='visible'] {
+		opacity: 1;
+		transform: none;
+		transition: none;
+	}
+
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
+}
