@@ -1,0 +1,6 @@
+"$schema" = "https://open-api.netlify.com/netlify.schema.json"
+
+[build]
+  command = "pnpm run build"
+  publish = "build"
+  environment = { NODE_VERSION = "24" }

@@ -21,6 +21,14 @@ export function resolveSiteOrigin(
 		return explicit.replace(/\/+$/, '');
 	}
 
+	if (env.CONTEXT === 'production' && env.URL) {
+		return env.URL.replace(/\/+$/, '');
+	}
+
+	if ((env.CONTEXT === 'deploy-preview' || env.CONTEXT === 'branch-deploy') && env.DEPLOY_PRIME_URL) {
+		return env.DEPLOY_PRIME_URL.replace(/\/+$/, '');
+	}
+
 	if (env.VERCEL_ENV === 'production' && env.VERCEL_PROJECT_PRODUCTION_URL) {
 		const prodHost = env.VERCEL_PROJECT_PRODUCTION_URL.replace(/^https?:\/\//, '').replace(/\/+$/, '');
 		return `https://${prodHost}`;
