@@ -64,22 +64,22 @@
 			<span class="inline-flex size-7 shrink-0 items-center justify-center rounded-full bg-coral font-mono text-[11px] font-medium text-obsidian">
 				01
 			</span>
-			<span class="whitespace-nowrap text-sm font-semibold tracking-[-0.02em] sm:hidden">
+			<span class="whitespace-nowrap text-sm font-semibold tracking-[-0.02em] lg:hidden">
 				BDN Workation
 			</span>
-			<span class="hidden whitespace-nowrap text-sm font-semibold tracking-[-0.02em] sm:inline sm:text-base">
+			<span class="hidden whitespace-nowrap text-sm font-semibold tracking-[-0.02em] lg:inline lg:text-base">
 				Barcelona Digital Nomads
 			</span>
 		</a>
 
-		<nav aria-label="Primary navigation" class="hidden items-center gap-1 md:flex">
+		<nav aria-label="Primary navigation" class="hidden items-center gap-0.5 md:flex lg:gap-1">
 			{#each NAV_LINKS as item (item.href)}
 				<a
 					href={item.href}
 					onclick={(e) => handleNav(e, item.href)}
 					aria-current={activeSection === item.href ? 'true' : undefined}
 					class={[
-						'inline-flex min-h-[44px] items-center gap-2 rounded-full px-3.5 text-sm font-medium transition-colors',
+						'inline-flex min-h-[44px] items-center gap-1.5 rounded-full px-2.5 text-sm font-medium whitespace-nowrap transition-colors lg:gap-2 lg:px-3.5',
 						activeSection === item.href
 							? 'bg-white/12 text-daylight'
 							: 'text-mist hover:text-daylight'
