@@ -59,50 +59,50 @@
 		<a
 			href="#top"
 			onclick={(e) => handleNav(e, '#top')}
-			class="inline-flex min-h-[44px] items-center gap-2.5 text-daylight no-underline transition-opacity hover:opacity-80"
+			class="inline-flex min-h-[44px] shrink-0 items-center gap-2.5 text-daylight no-underline transition-opacity hover:opacity-80"
 		>
 			<span class="inline-flex size-7 shrink-0 items-center justify-center rounded-full bg-coral font-mono text-[11px] font-medium text-obsidian">
 				01
 			</span>
-			<span class="whitespace-nowrap text-sm font-semibold tracking-[-0.02em] lg:hidden">
+			<span class="whitespace-nowrap text-sm font-semibold tracking-[-0.02em] xl:hidden">
 				BDN Workation
 			</span>
-			<span class="hidden whitespace-nowrap text-sm font-semibold tracking-[-0.02em] lg:inline lg:text-base">
+			<span class="hidden whitespace-nowrap text-sm font-semibold tracking-[-0.02em] xl:inline xl:text-base">
 				Barcelona Digital Nomads
 			</span>
 		</a>
 
-		<nav aria-label="Primary navigation" class="hidden items-center gap-0.5 md:flex lg:gap-1">
+		<nav aria-label="Primary navigation" class="hidden shrink-0 items-center gap-0.5 md:flex lg:gap-1">
 			{#each NAV_LINKS as item (item.href)}
 				<a
 					href={item.href}
 					onclick={(e) => handleNav(e, item.href)}
 					aria-current={activeSection === item.href ? 'true' : undefined}
 					class={[
-						'inline-flex min-h-[44px] items-center gap-1.5 rounded-full px-2.5 text-sm font-medium whitespace-nowrap transition-colors lg:gap-2 lg:px-3.5',
+						'inline-flex min-h-[44px] shrink-0 items-center gap-1.5 rounded-full px-2.5 text-sm font-medium whitespace-nowrap transition-colors lg:gap-2 lg:px-3.5',
 						activeSection === item.href
 							? 'bg-white/12 text-daylight'
 							: 'text-mist hover:text-daylight'
 					]}
 				>
 					{#if activeSection === item.href}
-						<span class="size-1.5 rounded-full bg-coral" aria-hidden="true"></span>
+						<span class="size-1.5 shrink-0 rounded-full bg-coral" aria-hidden="true"></span>
 					{/if}
 					<span>{item.label}</span>
 				</a>
 			{/each}
 		</nav>
 
-		<div class="flex items-center gap-2">
+		<div class="flex shrink-0 items-center gap-2">
 			<a
 				href={FORM_URL}
 				target="_blank"
 				rel="noopener noreferrer"
-				class="inline-flex min-h-[44px] items-center gap-1.5 rounded-full bg-coral px-4 py-2 font-mono text-xs font-medium tracking-[0.04em] text-obsidian uppercase transition-colors hover:bg-coral-hover sm:px-5"
+				class="inline-flex min-h-[44px] shrink-0 items-center gap-1.5 rounded-full bg-coral px-3.5 py-2 font-mono text-xs font-medium tracking-[0.04em] whitespace-nowrap text-obsidian uppercase transition-colors hover:bg-coral-hover lg:px-5"
 			>
-				<span class="hidden sm:inline">Express Interest</span>
-				<span class="sm:hidden">Interest</span>
-				<ArrowUpRight class="size-3.5" aria-hidden="true" />
+				<span class="hidden md:inline">Express Interest</span>
+				<span class="md:hidden">Interest</span>
+				<ArrowUpRight class="size-3.5 shrink-0" aria-hidden="true" />
 			</a>
 
 			<button
