@@ -1,16 +1,16 @@
 export const SITE_NAME = 'Barcelona Digital Nomads';
 export const SITE_SHORT_NAME = 'BDN Workation 001';
-export const SITE_TITLE = 'BDN Workation 001 — Gran Canaria | Barcelona Digital Nomads';
+export const SITE_TITLE = 'BDN Workation 001 — Agaete, Gran Canaria | Barcelona Digital Nomads';
 export const SITE_DESCRIPTION =
-	'Seven days in Gran Canaria (24–30 January 2027) with Barcelona Digital Nomads—shared villa coworking, island exploration, and community. Express your interest.';
+	'Seven days in Puerto de las Nieves, Agaete (Gran Canaria), 24–30 January 2027 with Barcelona Digital Nomads—31-room coastal coliving, 40-seat seafront coworking, natural pools, and community. Express your interest.';
 export const SITE_KEYWORDS =
-	'Barcelona Digital Nomads, BDN Workation, Gran Canaria workation, digital nomad retreat Spain, remote work Gran Canaria, coliving workation January 2027';
+	'Barcelona Digital Nomads, BDN Workation, Gran Canaria workation, Puerto de las Nieves Agaete coliving, digital nomad retreat Spain, remote work Gran Canaria, workation January 2027';
 
 export const OG_IMAGE_PATH = '/og-image.jpg';
 export const OG_IMAGE_WIDTH = 1200;
 export const OG_IMAGE_HEIGHT = 630;
 export const OG_IMAGE_ALT =
-	'BDN Workation 001 in Agaete, Gran Canaria — 24–30 January 2027 with Barcelona Digital Nomads';
+	'BDN Workation 001 in Puerto de las Nieves, Agaete, Gran Canaria — 24–30 January 2027 with Barcelona Digital Nomads';
 
 export function resolveSiteOrigin(
 	url: URL,
@@ -78,7 +78,7 @@ export function buildStructuredDataJson(origin: string): string {
 			{
 				'@type': 'WebSite',
 				'@id': `${pageUrl}#website`,
-				name: 'BDN Workation 001 — Gran Canaria',
+				name: 'BDN Workation 001 — Puerto de las Nieves, Agaete, Gran Canaria',
 				url: pageUrl,
 				inLanguage: 'en',
 				publisher: {
@@ -111,7 +111,7 @@ export function buildStructuredDataJson(origin: string): string {
 			{
 				'@type': 'Event',
 				'@id': `${pageUrl}#event`,
-				name: 'BDN Workation 001 — Gran Canaria',
+				name: 'BDN Workation 001 — Puerto de las Nieves, Agaete, Gran Canaria',
 				description: SITE_DESCRIPTION,
 				url: pageUrl,
 				startDate: '2027-01-24',
@@ -119,10 +119,10 @@ export function buildStructuredDataJson(origin: string): string {
 				eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
 				location: {
 					'@type': 'Place',
-					name: 'Gran Canaria',
+					name: 'Puerto de las Nieves, Agaete',
 					address: {
 						'@type': 'PostalAddress',
-						addressLocality: 'Gran Canaria',
+						addressLocality: 'Agaete',
 						addressRegion: 'Las Palmas',
 						addressCountry: 'ES'
 					}

@@ -75,7 +75,7 @@
 .loco-horizontal-track {
 	width: max-content;
 	transform: translate3d(
-		calc(min(1, max(0, (var(--progress, 0) - 0.28) / 0.44)) * (-100% + 100vw)),
+		calc(var(--chapter-progress, min(1, max(0, (var(--progress, 0) - 0.25) / 0.5))) * (-100% + 100vw)),
 		0,
 		0
 	);

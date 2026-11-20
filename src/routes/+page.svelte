@@ -4,6 +4,7 @@
 	import HeroCover from '#lib/components/HeroCover.svelte';
 	import IdeaSection from '#lib/components/IdeaSection.svelte';
 	import ExperienceChapters from '#lib/components/ExperienceChapters.svelte';
+	import VenueRoomsSection from '#lib/components/VenueRoomsSection.svelte';
 	import DestinationGallery from '#lib/components/DestinationGallery.svelte';
 	import DetailsLedger from '#lib/components/DetailsLedger.svelte';
 	import FinalCta from '#lib/components/FinalCta.svelte';
@@ -92,6 +93,7 @@
 	<HeroCover />
 	<IdeaSection />
 	<ExperienceChapters />
+	<VenueRoomsSection />
 	<DestinationGallery />
 	<DetailsLedger />
 	<FinalCta />

@@ -35,8 +35,9 @@
 
 <div bind:this={closingWrapper} class="relative z-20 bg-obsidian text-daylight">
 	<section
+		id="interest"
 		aria-labelledby="final-cta-heading"
-		class="border-t border-white/15 py-20 sm:py-28"
+		class="scroll-mt-24 border-t border-white/15 py-20 sm:scroll-mt-28 sm:py-28"
 	>
 		<div class="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-10">
 			<div class="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-end">
@@ -124,7 +125,7 @@
 					provisional.
 				</p>
 				<p>
-					Destination photography: BDN Survey Reference &amp; Wikimedia Commons (CC BY / CC BY-SA).
+					Destination &amp; venue photography: Puerto de las Nieves / Agaete partner dossier &amp; Gran Canaria archive.
 				</p>
 			</div>
 		</div>

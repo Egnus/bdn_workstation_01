@@ -38,8 +38,9 @@
 				</h1>
 
 				<p class="mt-5 max-w-[46ch] text-base leading-relaxed text-daylight sm:text-lg">
-					Seven days in Gran Canaria with the Barcelona Digital Nomads community—shared mornings
-					at the villa, island afternoons, and unhurried evenings together.
+					Seven days in Puerto de las Nieves (Agaete, Gran Canaria) with Barcelona Digital
+					Nomads—focused coastal coworking, volcanic island afternoons, and unhurried evenings
+					together.
 				</p>
 			</div>
 
@@ -51,7 +52,7 @@
 								Edition &amp; Place
 							</dt>
 							<dd class="mt-1 text-sm font-medium text-daylight">
-								{WORKATION_META.code} · Gran Canaria
+								{WORKATION_META.code} · Agaete, GC
 							</dd>
 						</div>
 						<div>
