@@ -1,121 +1,128 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-20T00:08:00+01:00",
-  "title": "Design System: BDN Workation 001",
+  "generatedAt": "2026-11-20T01:05:00+01:00",
+  "title": "Design System: BDN Workation 001 — Kinetic Archipelago",
   "extensions": {
     "colorMeta": {
-      "paper": {
+      "daylight": {
         "role": "neutral",
-        "displayName": "Warm Paper",
-        "canonical": "#f3f0e8",
-        "tonalRamp": ["#2d2b26", "#4b473f", "#6e685c", "#958e80", "#b8b0a1", "#d4cdbf", "#eae5da", "#f8f6ef"]
+        "displayName": "Warm Daylight",
+        "canonical": "#f8f8f6",
+        "tonalRamp": ["#2d2d29", "#4f4f49", "#75756d", "#9e9e96", "#c6c6be", "#ededeb", "#f8f8f6", "#ffffff"]
       },
-      "charcoal": {
+      "daylight-subtle": {
         "role": "neutral",
-        "displayName": "Charcoal",
-        "canonical": "#20231f",
-        "tonalRamp": ["#111310", "#20231f", "#343932", "#4b5048", "#696e65", "#8f948b", "#babeb7", "#e5e7e3"]
+        "displayName": "Daylight Subtle",
+        "canonical": "#ededeb",
+        "tonalRamp": ["#2b2b29", "#4c4c47", "#707069", "#989890", "#bfbfba", "#d9d9d5", "#ededeb", "#f7f7f5"]
       },
-      "volcanic": {
-        "role": "secondary",
-        "displayName": "Volcanic Green",
-        "canonical": "#75806b",
-        "tonalRamp": ["#22261e", "#363d30", "#464e40", "#5d6755", "#75806b", "#949f8a", "#b8c0b0", "#e3e7df"]
+      "daylight-card": {
+        "role": "neutral",
+        "displayName": "Daylight Card",
+        "canonical": "#ffffff",
+        "tonalRamp": ["#333333", "#595959", "#808080", "#a6a6a6", "#cccccc", "#e5e5e5", "#f5f5f5", "#ffffff"]
       },
-      "clay": {
+      "obsidian": {
+        "role": "neutral",
+        "displayName": "Obsidian Charcoal",
+        "canonical": "#0d1012",
+        "tonalRamp": ["#050708", "#0d1012", "#161a1e", "#262c32", "#3a4149", "#606974", "#a8b0b8", "#e6eaed"]
+      },
+      "obsidian-elevated": {
+        "role": "neutral",
+        "displayName": "Obsidian Elevated",
+        "canonical": "#161a1e",
+        "tonalRamp": ["#0a0c0e", "#161a1e", "#22282e", "#313942", "#47525e", "#6f7a87", "#a8b0b8", "#e2e6ea"]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Charcoal Ink",
+        "canonical": "#111315",
+        "tonalRamp": ["#070809", "#111315", "#24282c", "#3a4046", "#4b5259", "#747c85", "#adb3ba", "#e5e7ea"]
+      },
+      "ink-muted": {
+        "role": "neutral",
+        "displayName": "Muted Charcoal",
+        "canonical": "#4b5259",
+        "tonalRamp": ["#181a1d", "#2c3034", "#3d4248", "#4b5259", "#69717a", "#8e969f", "#b9bfc5", "#e6e9ec"]
+      },
+      "mist": {
+        "role": "neutral",
+        "displayName": "Mist",
+        "canonical": "#a8b0b8",
+        "tonalRamp": ["#2d3135", "#4a5057", "#676f78", "#868f99", "#a8b0b8", "#c2c8ce", "#dce0e4", "#f3f5f6"]
+      },
+      "coral": {
         "role": "primary",
-        "displayName": "Solar Clay",
-        "canonical": "#d68a50",
-        "tonalRamp": ["#4c2b12", "#75431d", "#9f5c2a", "#c5783d", "#d68a50", "#e1a475", "#edc2a0", "#f8e4d4"]
+        "displayName": "Signal Coral",
+        "canonical": "#ff5a26",
+        "tonalRamp": ["#5a1904", "#912b08", "#c83e11", "#e84b18", "#ff5a26", "#ff8057", "#ffa88a", "#ffd7c9"]
       },
-      "sand": {
+      "coral-hover": {
+        "role": "primary",
+        "displayName": "Signal Coral Hover",
+        "canonical": "#e84b18",
+        "tonalRamp": ["#4c1504", "#7e2507", "#b3370f", "#e84b18", "#f3683b", "#f8916f", "#fcb9a3", "#fde2d8"]
+      },
+      "slate-thumb": {
         "role": "neutral",
-        "displayName": "Sand",
-        "canonical": "#c6bba8",
-        "tonalRamp": ["#353129", "#524c40", "#736b5c", "#968c79", "#b0a592", "#c6bba8", "#ded6c8", "#f1ede4"]
+        "displayName": "Scrollbar Slate",
+        "canonical": "#3a4149",
+        "tonalRamp": ["#14171a", "#22262b", "#2f353c", "#3a4149", "#555f6b", "#778290", "#a5aeb8", "#dde1e5"]
       }
     },
     "typographyMeta": {
-      "display": { "displayName": "Display", "purpose": "Hero opening statement and closing colophon quote." },
-      "headline": { "displayName": "Headline", "purpose": "Primary section titles." },
-      "title": { "displayName": "Title", "purpose": "Chapter titles and ledger values." },
-      "body": { "displayName": "Body", "purpose": "Editorial paragraphs and detail notes." },
-      "label": { "displayName": "Label", "purpose": "IBM Plex Mono metadata, dates, and button labels." }
+      "display": { "displayName": "Display", "purpose": "Hero headline and closing manifesto." },
+      "headline": { "displayName": "Headline", "purpose": "Major chapter and section headers." },
+      "title": { "displayName": "Title", "purpose": "Horizontal experience card titles and ledger values." },
+      "body": { "displayName": "Body", "purpose": "Editorial paragraphs and card descriptions." },
+      "label": { "displayName": "Label", "purpose": "JetBrains Mono CTA buttons and metadata labels." },
+      "micro": { "displayName": "Micro", "purpose": "11px coordinate tags, captions, and scouting notice labels." }
     },
     "shadows": [],
     "motion": [
-      { "name": "ease-editorial", "value": "cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "Subtle 650ms reveal and smooth image scale." }
+      { "name": "locomotive-lenis", "value": "lerp: 0.1, duration: 1.05", "purpose": "Smooth inertial vertical scrolling with native sticky support." },
+      { "name": "loco-css-progress", "value": "--progress 0..1 linear across viewport travel", "purpose": "Drives hero parallax scale and pinned horizontal track translation." }
     ],
     "breakpoints": [
       { "name": "sm", "value": "640px" },
       { "name": "md", "value": "768px" },
-      { "name": "lg", "value": "1024px" }
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
     ]
   },
   "components": [
     {
-      "name": "Primary CTA Button",
+      "name": "Primary Coral Capsule CTA",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "Primary Solar Clay action button linking to the BDN interest survey.",
-      "html": "<a href=\"#\" class=\"ds-btn-primary\">Express Your Interest <svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M7 17 17 7\"/><path d=\"M7 7h10v10\"/></svg></a>",
-      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 8px; background: #d68a50; color: #20231f; padding: 14px 24px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border-radius: 0; transition: background-color 180ms ease; } .ds-btn-primary:hover { background: #c5783d; } .ds-btn-primary:focus-visible { outline: 2px solid #20231f; outline-offset: 3px; }"
+      "description": "High-contrast obsidian ink on Signal Coral pill linking to BDN survey.",
+      "html": "<a href=\"#\" class=\"ka-btn-coral\">Express Your Interest <svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M7 17 17 7\"/><path d=\"M7 7h10v10\"/></svg></a>",
+      "css": ".ka-btn-coral { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; border-radius: 9999px; background: #ff5a26; color: #0d1012; padding: 12px 24px; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; transition: background-color 180ms ease; } .ka-btn-coral:hover { background: #e84b18; } .ka-btn-coral:focus-visible { outline: 2px solid #ff5a26; outline-offset: 3px; }"
     },
     {
-      "name": "Secondary Outline Button",
-      "kind": "button",
-      "refersTo": "button-secondary",
-      "description": "Hairline-bordered secondary action button.",
-      "html": "<a href=\"#\" class=\"ds-btn-secondary\">Share Your Preferences <svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M7 17 17 7\"/><path d=\"M7 7h10v10\"/></svg></a>",
-      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: #20231f; border: 1px solid #20231f; padding: 12px 20px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border-radius: 0; transition: background-color 180ms ease, color 180ms ease; } .ds-btn-secondary:hover { background: #20231f; color: #f3f0e8; }"
-    },
-    {
-      "name": "Provisional Notice Banner",
-      "kind": "card",
-      "refersTo": "notice-provisional",
-      "description": "Volcanic-green bordered provisional disclaimer box.",
-      "html": "<div class=\"ds-notice\"><strong>Provisional &amp; non-binding</strong><p>No bookings or deposits are open yet. Filling out the survey helps BDN gauge demand.</p></div>",
-      "css": ".ds-notice { border: 1px solid #75806b; background: rgba(117, 128, 107, 0.1); color: #20231f; padding: 20px; font-family: 'Manrope', sans-serif; font-size: 14px; line-height: 1.6; } .ds-notice strong { display: block; font-weight: 600; margin-bottom: 4px; } .ds-notice p { margin: 0; color: #4b5048; }"
-    },
-    {
-      "name": "Villa Scouting Placeholder",
-      "kind": "card",
-      "refersTo": "placeholder-villa",
-      "description": "Dashed sand-bordered placeholder clearly marking unconfirmed property assets.",
-      "html": "<aside class=\"ds-placeholder\"><div class=\"ds-placeholder-head\"><span>Placeholder · Property Media &amp; Specs Pending</span><span>Status: Scouting</span></div><p>Exact villa photography, property address, and Wi-Fi metrics will be shared once confirmed.</p></aside>",
-      "css": ".ds-placeholder { border: 1px dashed #c6bba8; background: #eae5da; padding: 20px 24px; font-family: 'Manrope', sans-serif; } .ds-placeholder-head { display: flex; justify-content: space-between; gap: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #464e40; } .ds-placeholder p { margin: 10px 0 0; font-size: 14px; line-height: 1.6; color: #4b5048; }"
-    },
-    {
-      "name": "Editorial Sticky Header",
+      "name": "Floating Obsidian Pill Header",
       "kind": "nav",
-      "refersTo": "nav-header",
-      "description": "Minimal 64px sticky editorial header with dark CTA.",
-      "html": "<header class=\"ds-nav\"><span class=\"ds-nav-brand\">Barcelona Digital Nomads <small>/ 001</small></span><nav class=\"ds-nav-links\"><a href=\"#idea\">The Idea</a><a href=\"#experience\">Experience</a><a href=\"#details\">Details</a><a href=\"#\" class=\"ds-nav-cta\">Express Interest</a></nav></header>",
-      "css": ".ds-nav { display: flex; align-items: center; justify-content: space-between; padding: 12px 24px; background: #f3f0e8; border-bottom: 1px solid #c6bba8; font-family: 'Manrope', sans-serif; } .ds-nav-brand { font-family: 'Instrument Serif', serif; font-size: 22px; color: #20231f; } .ds-nav-brand small { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #4b5048; } .ds-nav-links { display: flex; align-items: center; gap: 20px; } .ds-nav-links a { font-size: 14px; color: #4b5048; text-decoration: none; } .ds-nav-cta { background: #20231f; color: #f3f0e8 !important; padding: 10px 16px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; }"
+      "refersTo": "nav-pill",
+      "description": "Floating translucent dark capsule bar with numbered coral badge and active-section dot.",
+      "html": "<header class=\"ka-nav\"><div class=\"ka-brand\"><span class=\"ka-num\">01</span><span>Barcelona Digital Nomads</span></div><nav class=\"ka-links\"><a href=\"#idea\" class=\"is-active\">The Idea</a><a href=\"#experience\">Experience</a><a href=\"#destination\">Destination</a><a href=\"#details\">Details</a></nav><a href=\"#\" class=\"ka-nav-cta\">Express Interest</a></header>",
+      "css": ".ka-nav { display: flex; align-items: center; justify-content: space-between; border-radius: 9999px; border: 1px solid rgba(255,255,255,0.15); background: rgba(13,16,18,0.92); color: #f8f8f6; padding: 8px 20px; font-family: 'Onest Variable', sans-serif; } .ka-brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; font-size: 15px; } .ka-num { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 9999px; background: #ff5a26; color: #0d1012; font-family: 'JetBrains Mono', monospace; font-size: 11px; } .ka-links { display: flex; gap: 8px; } .ka-links a { padding: 8px 14px; border-radius: 9999px; font-size: 14px; color: #a8b0b8; text-decoration: none; } .ka-links a.is-active { background: rgba(255,255,255,0.12); color: #f8f8f6; } .ka-nav-cta { border-radius: 9999px; background: #ff5a26; color: #0d1012; padding: 10px 18px; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; text-transform: uppercase; text-decoration: none; }"
+    },
+    {
+      "name": "Provisional Details Ledger Row",
+      "kind": "card",
+      "refersTo": "button-secondary",
+      "description": "1px hairline obsidian ledger row used across dates, rooms (€599/€749), and logistics.",
+      "html": "<div class=\"ka-ledger-row\"><div class=\"ka-ledger-label\">Shared twin room (indicative)</div><div class=\"ka-ledger-val\"><strong>€599 per person</strong><p>Twin room with private bathroom, shared with one other participant. Provisional.</p></div></div>",
+      "css": ".ka-ledger-row { display: grid; grid-template-columns: 5fr 7fr; gap: 16px; border-bottom: 1px solid rgba(248,248,246,0.14); padding: 24px 0; background: #0d1012; color: #f8f8f6; font-family: 'Onest Variable', sans-serif; } .ka-ledger-label { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: #a8b0b8; } .ka-ledger-val strong { display: block; font-size: 28px; font-weight: 700; letter-spacing: -0.02em; } .ka-ledger-val p { margin: 6px 0 0; font-size: 14px; color: #a8b0b8; }"
+    },
+    {
+      "name": "Villa Scouting Dashed Placeholder",
+      "kind": "card",
+      "refersTo": "daylight-card",
+      "description": "Transparent placeholder marking pending coworking/villa media until bookings open.",
+      "html": "<aside class=\"ka-placeholder\"><div class=\"ka-ph-head\"><span>Placeholder · Villa Media &amp; Specs Pending</span><span>Scouting</span></div><p>Exact villa photography, property address, workstation layout, and Wi-Fi bandwidth tests are intentionally omitted until confirmed.</p></aside>",
+      "css": ".ka-placeholder { border: 1px dashed rgba(17,19,21,0.25); border-radius: 16px; background: #ffffff; padding: 24px; color: #111315; font-family: 'Onest Variable', sans-serif; } .ka-ph-head { display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; } .ka-placeholder p { margin: 12px 0 0; font-size: 14px; line-height: 1.6; color: #4b5259; }"
     }
-  ],
-  "narrative": {
-    "northStar": "The Sunlit Travel Prospectus",
-    "overview": "BDN Workation 001 translates independent travel magazine aesthetics—generous editorial whitespace, crisp hairline divisions, high-contrast display serif typography, and unhurried documentary photography—into a fast, conversion-focused single-page experience for Barcelona Digital Nomads.\n\nRather than dressing an unconfirmed community workation in SaaS feature cards or hospitality clichés, the system grounds every band in tactile paper and volcanic mineral hues while reserving saturated warmth exclusively for primary survey calls-to-action.",
-    "keyCharacteristics": [
-      "Tactile Warm Paper canvas paired with sharp 1px Sand rules and zero drop shadows.",
-      "Three distinct, self-hosted typographic voices (Instrument Serif, Manrope, IBM Plex Mono) establishing all hierarchy without decorative badges or gradient flourishes.",
-      "Asymmetric 12-column editorial spreads that collapse cleanly to single-column mobile flow."
-    ],
-    "rules": [
-      { "name": "The High-Contrast Clay Rule", "body": "Never place white or cream text on Solar Clay (#d68a50); pair Solar Clay buttons exclusively with Charcoal (#20231f) ink so contrast exceeds 5.5:1.", "section": "colors" },
-      { "name": "The No-Eyebrow Rule", "body": "Headings open their section directly; metadata and chapter indices sit below or beside headlines, never stacked above as decorative eyebrow kickers.", "section": "typography" },
-      { "name": "The Flat-By-Default Rule", "body": "Surfaces remain flat at rest; hover feedback uses crisp color shifts or subtle scale on photography (1.02) without elevated box-shadows.", "section": "elevation" }
-    ],
-    "dos": [
-      "Do use 1px Sand (#c6bba8) hairlines and generous editorial whitespace instead of rounded card containers.",
-      "Do label provisional trip details and missing villa assets transparently in IBM Plex Mono.",
-      "Do pair Solar Clay (#d68a50) interactive controls with Charcoal (#20231f) ink."
-    ],
-    "donts": [
-      "Don't add SaaS three-column icon grids, decorative pill badges, purple/blue gradients, or box-shadows.",
-      "Don't stack uppercase eyebrows above headings.",
-      "Don't invent villa photographs or imply confirmed bookings/deposits."
-    ]
-  }
+  ]
 }

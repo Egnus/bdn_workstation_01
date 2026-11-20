@@ -1,41 +1,41 @@
 <script lang="ts">
-	import { ArrowUpRight, Menu, X } from '@lucide/svelte';
+	import { ArrowDown, ArrowUpRight, Menu, X } from '@lucide/svelte';
+	import { scrollToAnchor } from '#lib/actions/reveal';
 	import { FORM_URL, NAV_LINKS } from '#lib/data/workation';
 
 	let scrollY = $state(0);
 	let mobileOpen = $state(false);
+	let scrolled = $derived(scrollY > 40);
 	let activeSection = $state<string>('');
-	let scrolled = $derived(scrollY > 36);
 
 	$effect(() => {
 		const ids = NAV_LINKS.map((item) => item.href.replace('#', ''));
-		const elements = ids
-			.map((id) => document.getElementById(id))
-			.filter((el): el is HTMLElement => el !== null);
 
-		if (elements.length === 0) return;
-
-		const observer = new IntersectionObserver(
-			(entries) => {
-				for (const entry of entries) {
-					if (entry.isIntersecting) {
-						activeSection = `#${entry.target.id}`;
-					}
+		const syncActiveSection = () => {
+			const cutoff = window.innerHeight * 0.42;
+			let current = '';
+			for (const id of ids) {
+				const el = document.getElementById(id);
+				if (el && el.getBoundingClientRect().top <= cutoff) {
+					current = `#${id}`;
 				}
-			},
-			{
-				rootMargin: '-25% 0px -60% 0px',
-				threshold: 0
 			}
-		);
+			activeSection = current;
+		};
 
-		for (const el of elements) observer.observe(el);
-
-		return () => observer.disconnect();
+		syncActiveSection();
+		window.addEventListener('scroll', syncActiveSection, { passive: true });
+		window.addEventListener('resize', syncActiveSection, { passive: true });
+		return () => {
+			window.removeEventListener('scroll', syncActiveSection);
+			window.removeEventListener('resize', syncActiveSection);
+		};
 	});
 
-	function closeMobile() {
+	function handleNav(event: MouseEvent, href: string) {
+		event.preventDefault();
 		mobileOpen = false;
+		scrollToAnchor(href);
 	}
 
 	function onKeydown(event: KeyboardEvent) {
@@ -47,62 +47,61 @@
 
 <svelte:window bind:scrollY onkeydown={onKeydown} />
 
-<header
-	class={[
-		'sticky top-0 z-40 transition-colors duration-300',
-		scrolled
-			? 'border-b border-sand bg-paper/95 backdrop-blur-sm'
-			: 'border-b border-sand/60 bg-paper'
-	]}
->
-	<div class="mx-auto flex h-16 max-w-[1360px] items-center justify-between px-4 sm:px-8 lg:px-12">
+<header class="pointer-events-none fixed inset-x-0 top-3 z-50 px-3 sm:top-5 sm:px-6 lg:px-10">
+	<div
+		class={[
+			'pointer-events-auto mx-auto flex max-w-[1320px] items-center justify-between rounded-full border px-4 py-2 transition-all duration-300 sm:px-5',
+			scrolled
+				? 'border-white/15 bg-obsidian/92 text-daylight backdrop-blur-md'
+				: 'border-white/20 bg-obsidian/75 text-daylight backdrop-blur-md'
+		]}
+	>
 		<a
 			href="#top"
-			class="inline-flex min-h-[44px] items-center gap-3 text-charcoal no-underline transition-opacity hover:opacity-75"
+			onclick={(e) => handleNav(e, '#top')}
+			class="inline-flex min-h-[44px] items-center gap-2.5 text-daylight no-underline transition-opacity hover:opacity-80"
 		>
-			<span class="font-display text-xl tracking-[-0.01em] sm:text-2xl">
-				Barcelona Digital Nomads
+			<span class="inline-flex size-7 shrink-0 items-center justify-center rounded-full bg-coral font-mono text-[11px] font-medium text-obsidian">
+				01
 			</span>
-			<span class="hidden font-mono text-[11px] tracking-[0.08em] text-charcoal-muted uppercase sm:inline">
-				/ 001
+			<span class="whitespace-nowrap text-sm font-semibold tracking-[-0.02em] sm:hidden">
+				BDN Workation
+			</span>
+			<span class="hidden whitespace-nowrap text-sm font-semibold tracking-[-0.02em] sm:inline sm:text-base">
+				Barcelona Digital Nomads
 			</span>
 		</a>
 
-		<nav aria-label="Primary navigation" class="hidden items-center gap-7 md:flex">
+		<nav aria-label="Primary navigation" class="hidden items-center gap-1 md:flex">
 			{#each NAV_LINKS as item (item.href)}
 				<a
 					href={item.href}
+					onclick={(e) => handleNav(e, item.href)}
 					aria-current={activeSection === item.href ? 'true' : undefined}
 					class={[
-						'inline-flex min-h-[44px] items-center border-b-2 text-sm font-medium transition-colors',
+						'inline-flex min-h-[44px] items-center gap-2 rounded-full px-3.5 text-sm font-medium transition-colors',
 						activeSection === item.href
-							? 'border-clay text-charcoal'
-							: 'border-transparent text-charcoal-muted hover:text-charcoal'
+							? 'bg-white/12 text-daylight'
+							: 'text-mist hover:text-daylight'
 					]}
 				>
-					{item.label}
+					{#if activeSection === item.href}
+						<span class="size-1.5 rounded-full bg-coral" aria-hidden="true"></span>
+					{/if}
+					<span>{item.label}</span>
 				</a>
 			{/each}
-
-			<a
-				href={FORM_URL}
-				target="_blank"
-				rel="noopener noreferrer"
-				class="inline-flex min-h-[44px] items-center gap-1.5 border border-charcoal bg-charcoal px-4 py-2 font-mono text-xs font-medium tracking-[0.06em] text-paper uppercase transition-colors hover:border-clay hover:bg-clay hover:text-charcoal"
-			>
-				<span>Express Interest</span>
-				<ArrowUpRight class="size-3.5" aria-hidden="true" />
-			</a>
 		</nav>
 
-		<div class="flex items-center gap-2 md:hidden">
+		<div class="flex items-center gap-2">
 			<a
 				href={FORM_URL}
 				target="_blank"
 				rel="noopener noreferrer"
-				class="inline-flex min-h-[44px] items-center gap-1 bg-clay px-3.5 py-2 font-mono text-[11px] font-medium tracking-[0.06em] text-charcoal uppercase"
+				class="inline-flex min-h-[44px] items-center gap-1.5 rounded-full bg-coral px-4 py-2 font-mono text-xs font-medium tracking-[0.04em] text-obsidian uppercase transition-colors hover:bg-coral-hover sm:px-5"
 			>
-				<span>Interest</span>
+				<span class="hidden sm:inline">Express Interest</span>
+				<span class="sm:hidden">Interest</span>
 				<ArrowUpRight class="size-3.5" aria-hidden="true" />
 			</a>
 
@@ -112,12 +111,12 @@
 				aria-expanded={mobileOpen}
 				aria-controls="mobile-nav-drawer"
 				aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
-				class="inline-flex size-[44px] items-center justify-center border border-sand text-charcoal transition-colors hover:border-charcoal"
+				class="inline-flex size-[44px] items-center justify-center rounded-full border border-white/20 text-daylight transition-colors hover:border-white/40 md:hidden"
 			>
 				{#if mobileOpen}
-					<X class="size-5" aria-hidden="true" />
+					<X class="size-4" aria-hidden="true" />
 				{:else}
-					<Menu class="size-5" aria-hidden="true" />
+					<Menu class="size-4" aria-hidden="true" />
 				{/if}
 			</button>
 		</div>
@@ -127,32 +126,29 @@
 		<nav
 			id="mobile-nav-drawer"
 			aria-label="Mobile navigation"
-			class="border-t border-sand bg-paper px-4 py-5 md:hidden"
+			class="pointer-events-auto mx-auto mt-2 max-w-[1320px] rounded-3xl border border-white/15 bg-obsidian/95 p-5 text-daylight backdrop-blur-md md:hidden"
 		>
-			<ul class="flex flex-col divide-y divide-sand/70">
+			<ul class="flex flex-col divide-y divide-white/10">
 				{#each NAV_LINKS as item (item.href)}
 					<li>
 						<a
 							href={item.href}
-							onclick={closeMobile}
-							class={[
-								'flex min-h-[48px] items-center justify-between font-display text-2xl',
-								activeSection === item.href ? 'text-charcoal underline decoration-clay underline-offset-4' : 'text-charcoal'
-							]}
+							onclick={(e) => handleNav(e, item.href)}
+							class="flex min-h-[48px] items-center justify-between text-xl font-semibold tracking-[-0.02em] text-daylight"
 						>
 							<span>{item.label}</span>
-							<span class="font-mono text-xs text-charcoal-muted">↓</span>
+							<ArrowDown class="size-4 text-mist" aria-hidden="true" />
 						</a>
 					</li>
 				{/each}
 			</ul>
-			<div class="mt-5 border-t border-sand pt-4">
+			<div class="mt-4 pt-3">
 				<a
 					href={FORM_URL}
 					target="_blank"
 					rel="noopener noreferrer"
-					onclick={closeMobile}
-					class="flex min-h-[48px] w-full items-center justify-center gap-2 bg-clay px-5 py-3 font-mono text-xs font-medium tracking-[0.08em] text-charcoal uppercase"
+					onclick={() => (mobileOpen = false)}
+					class="flex min-h-[48px] w-full items-center justify-center gap-2 rounded-full bg-coral px-5 py-3 font-mono text-xs font-medium tracking-[0.06em] text-obsidian uppercase"
 				>
 					<span>Express Your Interest</span>
 					<ArrowUpRight class="size-4" aria-hidden="true" />

@@ -1,63 +1,150 @@
 <script lang="ts">
-	import { hairline } from '#lib/actions/reveal';
+	import roqueNubloPhoto from '#lib/assets/photos/roque-nublo.jpg?enhanced';
+	import tamadabaCliffsPhoto from '#lib/assets/photos/tamadaba-cliffs.jpg?enhanced';
+	import tejedaSunsetPhoto from '#lib/assets/photos/tejeda-sunset.jpg?enhanced';
+	import veguetaPhoto from '#lib/assets/photos/vegueta-arch.jpg?enhanced';
 </script>
 
 <section
 	id="idea"
 	aria-labelledby="idea-heading"
-	class="scroll-mt-16 bg-paper py-16 sm:py-24"
+	class="relative scroll-mt-24 overflow-hidden bg-daylight py-20 text-ink sm:scroll-mt-28 sm:py-28 lg:py-36"
 >
-	<div class="mx-auto max-w-[1360px] px-4 sm:px-8 lg:px-12">
-		<div use:hairline class="hairline-rule mb-12 h-px w-full bg-sand sm:mb-16" aria-hidden="true"></div>
+	<div class="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-10">
+		<!-- Locomotive Scroll Photo Galaxy (desktop parallax stage) -->
+		<div class="relative flex flex-col justify-center py-8 lg:min-h-[480px] lg:py-24">
+			<div
+				data-scroll
+				data-scroll-speed="-0.09"
+				class="pointer-events-none hidden lg:block lg:absolute lg:top-0 lg:left-0 lg:w-36 xl:w-44"
+			>
+				<div class="aspect-square overflow-hidden rounded-2xl">
+					<enhanced:img
+						src={roqueNubloPhoto}
+						alt="Roque Nublo volcanic peaks and Canary pine forest"
+						sizes="180px"
+						loading="lazy"
+						class="h-full w-full object-cover"
+					/>
+				</div>
+			</div>
 
-		<div class="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12">
-			<div class="lg:col-span-5">
+			<div
+				data-scroll
+				data-scroll-speed="0.11"
+				class="pointer-events-none hidden lg:block lg:absolute lg:top-2 lg:right-4 lg:w-36 xl:w-44"
+			>
+				<div class="aspect-[4/5] overflow-hidden rounded-2xl">
+					<enhanced:img
+						src={veguetaPhoto}
+						alt="Carved volcanic stone architecture in Vegueta, Gran Canaria"
+						sizes="180px"
+						loading="lazy"
+						class="h-full w-full object-cover"
+					/>
+				</div>
+			</div>
+
+			<div
+				data-scroll
+				data-scroll-speed="0.09"
+				class="pointer-events-none hidden lg:block lg:absolute lg:bottom-2 lg:left-6 lg:w-40 xl:w-48"
+			>
+				<div class="aspect-[4/3] overflow-hidden rounded-2xl">
+					<enhanced:img
+						src={tamadabaCliffsPhoto}
+						alt="Tamadaba Atlantic sea cliffs in Gran Canaria"
+						sizes="200px"
+						loading="lazy"
+						class="h-full w-full object-cover"
+					/>
+				</div>
+			</div>
+
+			<div
+				data-scroll
+				data-scroll-speed="-0.11"
+				class="pointer-events-none hidden lg:block lg:absolute lg:bottom-4 lg:right-0 lg:w-36 xl:w-44"
+			>
+				<div class="aspect-square overflow-hidden rounded-2xl">
+					<enhanced:img
+						src={tejedaSunsetPhoto}
+						alt="Caldera de Tejeda sunset over Gran Canaria"
+						sizes="180px"
+						loading="lazy"
+						class="h-full w-full object-cover"
+					/>
+				</div>
+			</div>
+
+			<div class="relative z-10 mx-auto max-w-[620px] text-center">
 				<h2
 					id="idea-heading"
-					class="font-display text-[clamp(2.25rem,4.4vw,3.6rem)] leading-[1.03] tracking-[-0.02em] text-balance text-charcoal"
+					class="text-[clamp(2.35rem,4.6vw,4rem)] leading-[0.98] font-bold tracking-[-0.04em] text-balance text-ink"
 				>
-					Taking Barcelona Digital Nomads on the road.
+					Taking Barcelona Digital Nomads on the road for seven unhurried days.
 				</h2>
 
-				<p class="mt-5 font-mono text-xs leading-relaxed tracking-[0.04em] text-volcanic-deep uppercase">
-					First community workation · Interest-gauging stage
+				<p class="mx-auto mt-6 max-w-[52ch] text-base leading-relaxed text-ink-muted sm:text-lg">
+					Built by our community—not a commercial coliving chain. Familiar faces from Barcelona
+					meetups alongside new members looking for focused workdays and genuine island time.
 				</p>
 			</div>
 
-			<div class="space-y-6 lg:col-span-6 lg:col-start-7">
-				<p class="max-w-[62ch] text-lg leading-[1.7] text-charcoal">
-					Most remote weeks happen behind a screen in the same routine—good coffee, familiar
-					streets, and Slack channels that rarely spill into real life. BDN Workation 001 is a
-					simple invitation to break that rhythm for seven days in January.
-				</p>
+			<!-- Mobile compact photo mosaic -->
+			<div class="mt-8 grid grid-cols-2 gap-3 lg:hidden">
+				<div class="aspect-[4/3] overflow-hidden rounded-xl">
+					<enhanced:img
+						src={roqueNubloPhoto}
+						alt="Roque Nublo volcanic peaks"
+						sizes="46vw"
+						loading="lazy"
+						class="h-full w-full object-cover"
+					/>
+				</div>
+				<div class="aspect-[4/3] overflow-hidden rounded-xl">
+					<enhanced:img
+						src={tamadabaCliffsPhoto}
+						alt="Tamadaba Atlantic sea cliffs"
+						sizes="46vw"
+						loading="lazy"
+						class="h-full w-full object-cover"
+					/>
+				</div>
+			</div>
+		</div>
 
-				<p class="max-w-[62ch] text-base leading-[1.75] text-charcoal-muted">
-					Instead of booking a generic coliving package full of strangers, we are exploring a
-					shared villa in Gran Canaria for around forty people from our Barcelona community—familiar
-					faces from BDN meetups alongside new members looking for deeper connection, solid
-					workdays, and a week worth remembering.
+		<!-- Narrative + Explicit Villa Scouting Placeholder -->
+		<div class="mt-12 grid grid-cols-1 gap-8 border-t border-line-dark pt-12 lg:mt-24 lg:grid-cols-12 lg:gap-12">
+			<div class="lg:col-span-6">
+				<p class="max-w-[54ch] text-lg leading-relaxed font-medium text-ink">
+					Most remote workweeks blur into the same café tables and Slack threads. BDN Workation 001
+					trades January routine in Barcelona for one shared villa in Gran Canaria.
 				</p>
-
-				<p class="max-w-[62ch] text-base leading-[1.75] text-charcoal-muted">
-					Right now we are gauging interest before locking in the property and dates. If enough
-					people raise their hand in the survey, we will host an online info session and open a
-					dedicated WhatsApp group to finalize every detail together.
+				<p class="mt-4 max-w-[54ch] text-base leading-relaxed text-ink-muted">
+					We are gauging interest first before committing a property. Once enough people raise their
+					hand in the survey, we will run an online info session and open a dedicated WhatsApp
+					group to lock in the details together.
 				</p>
+			</div>
 
+			<div class="lg:col-span-6">
 				<aside
 					aria-label="Villa confirmation placeholder"
-					class="mt-8 border border-dashed border-sand bg-paper-inset px-5 py-5 sm:px-6"
+					class="rounded-2xl border border-dashed border-ink/25 bg-daylight-card p-6 sm:p-8"
 				>
-					<div class="flex flex-wrap items-baseline justify-between gap-2">
-						<span class="font-mono text-[11px] font-medium tracking-[0.08em] text-volcanic-deep uppercase">
-							Placeholder · Property Media &amp; Specs Pending
+					<div class="flex flex-wrap items-center justify-between gap-2">
+						<span class="font-mono text-[11px] font-medium tracking-[0.06em] text-ink uppercase">
+							Placeholder · Villa Media &amp; Specs Pending
 						</span>
-						<span class="font-mono text-[11px] text-charcoal-muted">Status: Scouting</span>
+						<span class="inline-flex items-center gap-1.5 rounded-full bg-daylight-subtle px-3 py-1 font-mono text-[11px] text-ink">
+							<span class="size-1.5 rounded-full bg-coral" aria-hidden="true"></span>
+							Scouting
+						</span>
 					</div>
-					<p class="mt-2.5 text-sm leading-relaxed text-charcoal-muted">
-						Exact villa photography, property address, desk capacity, and Wi-Fi metrics are not
-						published yet and will only be shared once the group is confirmed and a property is
-						reserved.
+					<p class="mt-3 text-sm leading-relaxed text-ink-muted">
+						Exact villa photography, property address, workstation layout, and Wi-Fi bandwidth tests
+						are intentionally omitted until demand is confirmed and a specific villa is reserved.
 					</p>
 				</aside>
 			</div>

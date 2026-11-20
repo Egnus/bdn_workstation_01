@@ -2,169 +2,175 @@
 	import veguetaPhoto from '#lib/assets/photos/vegueta-arch.jpg?enhanced';
 	import agaetePhoto from '#lib/assets/photos/agaete-gran-canaria.jpg?enhanced';
 	import lasCanterasPhoto from '#lib/assets/photos/las-canteras.jpg?enhanced';
-	import { hairline } from '#lib/actions/reveal';
+	import tamadabaCliffsPhoto from '#lib/assets/photos/tamadaba-cliffs.jpg?enhanced';
+	import { scrollToAnchor } from '#lib/actions/reveal';
 
-	const plates = [
+	const spots = [
 		{
-			id: 'architecture',
-			label: '01 Architecture · Vegueta',
-			summary: 'Carved basalt stone portals, shaded wooden balconies, and quiet neighborhood plazas.'
+			id: 'vegueta',
+			label: 'Vegueta Stonework',
+			note: 'Carved volcanic portals, timber balconies, and quiet neighborhood squares.'
 		},
 		{
-			id: 'landscape',
-			label: '02 Landscape · Agaete Valley',
-			summary: 'Whitewashed villages tucked below emerald volcanic walls—our destination mood.'
+			id: 'agaete',
+			label: 'Agaete Valley',
+			note: 'Whitewashed coastal homes below steep emerald ridges.'
 		},
 		{
-			id: 'atmosphere',
-			label: '03 Atmosphere · Atlantic Horizon',
-			summary: 'Late-afternoon walks by the water after closing the laptop for the day.'
+			id: 'tamadaba',
+			label: 'Tamadaba Cliffs',
+			note: 'Volcanic ocean walls meeting the Atlantic swell.'
+		},
+		{
+			id: 'canteras',
+			label: 'Las Canteras Dusk',
+			note: 'Warm January evenings along the ocean promenade.'
 		}
 	] as const;
 
-	let selectedPlate = $state<string>('architecture');
+	let activeSpot = $state<string>('agaete');
+
+	function focusSpot(id: string) {
+		activeSpot = id;
+		scrollToAnchor(`#spot-${id}`);
+	}
 </script>
 
 <section
 	id="destination"
 	aria-labelledby="destination-heading"
-	class="scroll-mt-16 bg-paper-inset py-16 sm:py-24"
+	class="scroll-mt-24 bg-daylight py-20 pb-28 text-ink sm:scroll-mt-28 sm:py-28 sm:pb-36"
 >
-	<div class="mx-auto max-w-[1360px] px-4 sm:px-8 lg:px-12">
-		<div use:hairline class="hairline-rule mb-12 h-px w-full bg-sand sm:mb-16" aria-hidden="true"></div>
-
-		<div class="grid grid-cols-1 gap-8 pb-12 lg:grid-cols-12 lg:items-end">
-			<div class="lg:col-span-6">
+	<div class="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-10">
+		<div class="grid grid-cols-1 gap-8 border-b border-line-dark pb-10 lg:grid-cols-12 lg:items-end">
+			<div class="lg:col-span-7">
 				<h2
 					id="destination-heading"
-					class="font-display text-[clamp(2.4rem,4.8vw,4rem)] leading-[1.02] tracking-[-0.02em] text-balance text-charcoal"
+					class="text-[clamp(2.4rem,5vw,4.25rem)] leading-[0.96] font-bold tracking-[-0.04em] text-balance text-ink"
 				>
-					Gran Canaria, a winter refuge of stone, sea, and sun.
+					Gran Canaria, built for January sun and mountain air.
 				</h2>
 			</div>
-
-			<div class="lg:col-span-5 lg:col-start-8">
-				<p class="max-w-[48ch] text-base leading-[1.7] text-charcoal-muted">
-					While northern Europe and mainland Spain sit deep in January cold, Gran Canaria holds mild
-					daylight, volcanic mountain trails, historic stone neighborhoods, and an Atlantic coast
-					that resets the pace of a workweek.
+			<div class="lg:col-span-5">
+				<p class="text-base leading-relaxed text-ink-muted">
+					Mild Atlantic daylight, volcanic trails, and historic coastal neighborhoods—every frame
+					below is real Gran Canaria photography.
 				</p>
 
-				<div
-					role="group"
-					aria-label="Highlight destination plate"
-					class="mt-6 flex flex-wrap gap-2 border-t border-sand pt-4"
-				>
-					{#each plates as plate (plate.id)}
+				<div role="group" aria-label="Focus destination scene" class="mt-5 flex flex-wrap gap-2">
+					{#each spots as spot (spot.id)}
 						<button
 							type="button"
-							onclick={() => (selectedPlate = plate.id)}
-							aria-pressed={selectedPlate === plate.id}
+							onclick={() => focusSpot(spot.id)}
+							aria-pressed={activeSpot === spot.id}
 							class={[
-								'min-h-[44px] border px-3 py-2 font-mono text-[11px] tracking-[0.05em] uppercase transition-colors',
-								selectedPlate === plate.id
-									? 'border-charcoal bg-charcoal text-paper'
-									: 'border-sand bg-paper/60 text-charcoal-muted hover:border-charcoal hover:text-charcoal'
+								'min-h-[44px] rounded-full border px-3.5 py-2 font-mono text-[11px] font-medium uppercase transition-colors',
+								activeSpot === spot.id
+									? 'border-obsidian bg-obsidian text-daylight'
+									: 'border-line-dark bg-transparent text-ink-muted hover:border-ink hover:text-ink'
 							]}
 						>
-							{plate.label}
+							{spot.label}
 						</button>
 					{/each}
 				</div>
 			</div>
 		</div>
 
-		<div class="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-start">
+		<div class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-12">
 			<figure
-				class={[
-					'transition-opacity duration-300 lg:col-span-4',
-					selectedPlate === 'architecture' ? 'opacity-100' : 'opacity-80 hover:opacity-100'
-				]}
+				id="spot-vegueta"
+				data-scroll
+				data-scroll-speed="0.08"
+				class="scroll-mt-24 sm:scroll-mt-28 md:col-span-5"
 			>
 				<div
+					data-scroll
+					data-scroll-css-progress
 					class={[
-						'aspect-[3/4] overflow-hidden border bg-paper transition-colors duration-300',
-						selectedPlate === 'architecture' ? 'border-clay' : 'border-transparent'
+						'aspect-[3/4] overflow-hidden rounded-2xl border transition-colors duration-300',
+						activeSpot === 'vegueta' ? 'border-coral' : 'border-transparent'
 					]}
 				>
 					<enhanced:img
 						src={veguetaPhoto}
-						alt="Historic carved volcanic stone doorway and timber balcony in Vegueta, Las Palmas de Gran Canaria"
-						sizes="(min-width: 1024px) 30vw, 94vw"
+						alt="Carved volcanic stone doorway and timber balcony in Vegueta, Las Palmas de Gran Canaria"
+						sizes="(min-width: 768px) 38vw, 94vw"
 						loading="lazy"
-						class="h-full w-full object-cover"
+						class="loco-scale-img h-full w-full object-cover"
 					/>
 				</div>
-				<figcaption class="mt-3 border-t border-sand pt-2.5">
-					<span class="block font-mono text-[11px] font-medium tracking-[0.06em] text-charcoal uppercase">
-						Architecture · Vegueta, Las Palmas
-					</span>
-					<span class="mt-1 block text-sm leading-relaxed text-charcoal-muted">
-						{plates[0].summary}
-					</span>
+				<figcaption class="mt-3 flex items-baseline justify-between gap-4 border-t border-line-dark pt-2.5">
+					<span class="font-mono text-xs font-medium text-ink uppercase">Vegueta, Las Palmas</span>
+					<span class="text-xs text-ink-muted">{spots[0].note}</span>
 				</figcaption>
 			</figure>
 
-			<div class="grid grid-cols-1 gap-8 lg:col-span-8">
-				<figure
-					class={[
-						'transition-opacity duration-300',
-						selectedPlate === 'landscape' ? 'opacity-100' : 'opacity-80 hover:opacity-100'
-					]}
-				>
+			<div class="grid grid-cols-1 gap-8 md:col-span-7">
+				<figure id="spot-agaete" class="scroll-mt-24 sm:scroll-mt-28">
 					<div
+						data-scroll
+						data-scroll-css-progress
 						class={[
-							'aspect-[16/10] overflow-hidden border bg-paper transition-colors duration-300',
-							selectedPlate === 'landscape' ? 'border-clay' : 'border-transparent'
+							'aspect-[16/10] overflow-hidden rounded-2xl border transition-colors duration-300',
+							activeSpot === 'agaete' ? 'border-coral' : 'border-transparent'
 						]}
 					>
 						<enhanced:img
 							src={agaetePhoto}
-							alt="Whitewashed coastal houses in Agaete beneath steep green volcanic mountains"
-							sizes="(min-width: 1024px) 62vw, 94vw"
+							alt="Whitewashed coastal homes in Agaete framed by emerald volcanic peaks"
+							sizes="(min-width: 768px) 54vw, 94vw"
 							loading="lazy"
-							class="h-full w-full object-cover object-center"
+							class="loco-scale-img h-full w-full object-cover"
 						/>
 					</div>
-					<figcaption class="mt-3 flex flex-col justify-between gap-2 border-t border-sand pt-2.5 sm:flex-row sm:items-baseline">
-						<span class="font-mono text-[11px] font-medium tracking-[0.06em] text-charcoal uppercase">
-							Landscape · Agaete Valley
-						</span>
-						<span class="text-sm text-charcoal-muted">
-							{plates[1].summary}
-						</span>
+					<figcaption class="mt-3 flex items-baseline justify-between gap-4 border-t border-line-dark pt-2.5 pb-2">
+						<span class="font-mono text-xs font-medium text-ink uppercase">Agaete Valley</span>
+						<span class="text-xs text-ink-muted">{spots[1].note}</span>
 					</figcaption>
 				</figure>
 
-				<figure
-					class={[
-						'transition-opacity duration-300',
-						selectedPlate === 'atmosphere' ? 'opacity-100' : 'opacity-80 hover:opacity-100'
-					]}
-				>
-					<div
-						class={[
-							'aspect-[16/9] overflow-hidden border bg-charcoal transition-colors duration-300',
-							selectedPlate === 'atmosphere' ? 'border-clay' : 'border-transparent'
-						]}
-					>
-						<enhanced:img
-							src={lasCanterasPhoto}
-							alt="Warm sunset horizon over calm ocean water at Las Canteras beach in Gran Canaria"
-							sizes="(min-width: 1024px) 62vw, 94vw"
-							loading="lazy"
-							class="h-full w-full object-cover"
-						/>
-					</div>
-					<figcaption class="mt-3 flex flex-col justify-between gap-2 border-t border-sand pt-2.5 sm:flex-row sm:items-baseline">
-						<span class="font-mono text-[11px] font-medium tracking-[0.06em] text-charcoal uppercase">
-							Atmosphere · Atlantic Horizon
-						</span>
-						<span class="text-sm text-charcoal-muted">
-							{plates[2].summary}
-						</span>
-					</figcaption>
-				</figure>
+				<div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+					<figure id="spot-tamadaba" data-scroll data-scroll-speed="0.03" class="scroll-mt-24 sm:scroll-mt-28">
+						<div
+							class={[
+								'aspect-[4/3] overflow-hidden rounded-2xl border transition-colors duration-300',
+								activeSpot === 'tamadaba' ? 'border-coral' : 'border-transparent'
+							]}
+						>
+							<enhanced:img
+								src={tamadabaCliffsPhoto}
+								alt="Steep volcanic cliffs of Tamadaba dropping into the Atlantic Ocean"
+								sizes="(min-width: 768px) 26vw, 94vw"
+								loading="lazy"
+								class="h-full w-full object-cover"
+							/>
+						</div>
+						<figcaption class="mt-2.5 font-mono text-[11px] text-ink-muted">
+							Tamadaba Sea Cliffs · Northwest Coast
+						</figcaption>
+					</figure>
+
+					<figure id="spot-canteras" data-scroll data-scroll-speed="0.06" class="scroll-mt-24 sm:scroll-mt-28">
+						<div
+							class={[
+								'aspect-[4/3] overflow-hidden rounded-2xl border transition-colors duration-300',
+								activeSpot === 'canteras' ? 'border-coral' : 'border-transparent'
+							]}
+						>
+							<enhanced:img
+								src={lasCanterasPhoto}
+								alt="Golden-hour Atlantic sunset at Las Canteras beach, Gran Canaria"
+								sizes="(min-width: 768px) 26vw, 94vw"
+								loading="lazy"
+								class="h-full w-full object-cover"
+							/>
+						</div>
+						<figcaption class="mt-2.5 font-mono text-[11px] text-ink-muted">
+							Las Canteras Horizon · Atlantic Dusk
+						</figcaption>
+					</figure>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -1,97 +1,127 @@
 @import 'tailwindcss';
+@import 'locomotive-scroll/dist/locomotive-scroll.css';
 
 @theme {
-	--color-paper: #f3f0e8;
-	--color-paper-elevated: #f8f6ef;
-	--color-paper-inset: #eae5da;
-	--color-charcoal: #20231f;
-	--color-charcoal-muted: #4b5048;
-	--color-volcanic: #75806b;
-	--color-volcanic-deep: #464e40;
-	--color-clay: #d68a50;
-	--color-clay-hover: #c5783d;
-	--color-sand: #c6bba8;
+	--color-daylight: #f8f8f6;
+	--color-daylight-card: #ffffff;
+	--color-daylight-subtle: #ededeb;
+	--color-obsidian: #0d1012;
+	--color-obsidian-elevated: #161a1e;
+	--color-ink: #111315;
+	--color-ink-muted: #4b5259;
+	--color-mist: #a8b0b8;
+	--color-coral: #ff5a26;
+	--color-coral-hover: #e84b18;
+	--color-line-dark: rgba(17, 19, 21, 0.12);
+	--color-line-light: rgba(248, 248, 246, 0.14);
 
-	--font-display: 'Instrument Serif', Georgia, 'Times New Roman', serif;
-	--font-sans: 'Manrope Variable', 'Manrope', system-ui, -apple-system, sans-serif;
-	--font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+	--font-display: 'Onest Variable', 'Onest', system-ui, -apple-system, sans-serif;
+	--font-sans: 'Onest Variable', 'Onest', system-ui, -apple-system, sans-serif;
+	--font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
 @layer base {
 	html {
-		background-color: var(--color-paper);
-		color: var(--color-charcoal);
+		background-color: var(--color-daylight);
+		color: var(--color-ink);
 		font-family: var(--font-sans);
 		font-size: 100%;
-		scroll-behavior: smooth;
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
 	}
 
 	body {
 		margin: 0;
-		background-color: var(--color-paper);
-		color: var(--color-charcoal);
-		line-height: 1.6;
+		background-color: var(--color-daylight);
+		color: var(--color-ink);
+		line-height: 1.55;
 		overflow-x: clip;
 	}
 
 	::selection {
-		background-color: var(--color-clay);
-		color: var(--color-charcoal);
+		background-color: var(--color-coral);
+		color: var(--color-obsidian);
 	}
 
 	:focus-visible {
-		outline: 2px solid var(--color-charcoal);
+		outline: 2px solid var(--color-coral);
 		outline-offset: 3px;
 	}
 
 	::-webkit-scrollbar {
-		width: 10px;
+		width: 9px;
 	}
 
 	::-webkit-scrollbar-track {
-		background: var(--color-paper);
+		background: var(--color-obsidian);
 	}
 
 	::-webkit-scrollbar-thumb {
-		background: var(--color-sand);
-		border: 2px solid var(--color-paper);
+		background: #3a4149;
+		border-radius: 9999px;
 	}
 
 	::-webkit-scrollbar-thumb:hover {
-		background: var(--color-volcanic);
+		background: var(--color-coral);
 	}
 }
 
-.hairline-rule {
-	transform-origin: left center;
-	transition:
-		transform 700ms cubic-bezier(0.22, 1, 0.36, 1),
-		opacity 500ms cubic-bezier(0.22, 1, 0.36, 1);
+.loco-hero-media {
+	transform: translate3d(0, calc(var(--progress, 0) * 10%), 0)
+		scale(calc(1.02 + var(--progress, 0) * 0.08));
+	will-change: transform;
 }
 
-.hairline-rule[data-hairline='pending'] {
-	transform: scaleX(0.35);
-	opacity: 0.4;
+.loco-horizontal-track {
+	width: max-content;
+	transform: translate3d(
+		calc(min(1, max(0, (var(--progress, 0) - 0.28) / 0.44)) * (-100% + 100vw)),
+		0,
+		0
+	);
+	will-change: transform;
 }
 
-.hairline-rule[data-hairline='visible'] {
-	transform: scaleX(1);
+.loco-fade-scale {
 	opacity: 1;
+	transform: translateY(0) scale(1);
+	transition:
+		opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+		transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.loco-scale-img {
+	transform: scale(calc(1.08 - var(--progress, 0.5) * 0.08));
+	will-change: transform;
 }
 
 @media (prefers-reduced-motion: reduce) {
-	html {
-		scroll-behavior: auto;
+	.loco-hero-media,
+	.loco-horizontal-track,
+	.loco-scale-img {
+		transform: none !important;
+		will-change: auto;
 	}
 
-	.hairline-rule,
-	.hairline-rule[data-hairline='pending'],
-	.hairline-rule[data-hairline='visible'] {
-		opacity: 1;
-		transform: none;
-		transition: none;
+	.loco-sticky-host {
+		height: auto !important;
+	}
+
+	.loco-sticky-frame {
+		position: static !important;
+		overflow: visible !important;
+	}
+
+	.loco-horizontal-track {
+		width: 100%;
+		max-width: 1320px;
+		margin-inline: auto;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.loco-horizontal-track > article {
+		width: 100% !important;
 	}
 
 	*,

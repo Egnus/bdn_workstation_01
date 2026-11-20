@@ -1,224 +1,312 @@
 <script lang="ts">
 	import roqueNubloPhoto from '#lib/assets/photos/roque-nublo.jpg?enhanced';
-	import tamadabaCliffsPhoto from '#lib/assets/photos/tamadaba-cliffs.jpg?enhanced';
 	import tejedaSunsetPhoto from '#lib/assets/photos/tejeda-sunset.jpg?enhanced';
-	import { hairline } from '#lib/actions/reveal';
+	import { scrollToAnchor, scrollToPosition } from '#lib/actions/reveal';
 	import { EXPERIENCE_CHAPTERS } from '#lib/data/workation';
 
 	const [workChapter, exploreChapter, memoriesChapter] = EXPERIENCE_CHAPTERS;
-	let activeChapter = $state(workChapter.id);
+	let activeIndex = $state(0);
+	let trackHostEl = $state<HTMLElement | null>(null);
 
-	function jumpToChapter(id: string) {
-		activeChapter = id;
-		document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+	const chapterNames = ['Work together', 'Explore together', 'Make memories together'];
+
+	$effect(() => {
+		const syncChapterOnScroll = () => {
+			if (!trackHostEl || window.innerWidth < 1024) return;
+			if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+			const rect = trackHostEl.getBoundingClientRect();
+			const vh = window.innerHeight;
+			const rawProgress = (vh - rect.top) / (vh + rect.height);
+			if (rawProgress < 0.28 || rawProgress > 0.85) return;
+
+			const clamped = Math.min(1, Math.max(0, (rawProgress - 0.28) / 0.44));
+			activeIndex = clamped < 0.33 ? 0 : clamped < 0.67 ? 1 : 2;
+		};
+
+		window.addEventListener('scroll', syncChapterOnScroll, { passive: true });
+		return () => window.removeEventListener('scroll', syncChapterOnScroll);
+	});
+
+	function selectChapter(idx: number) {
+		activeIndex = idx;
+		const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		if (window.innerWidth < 1024) {
+			scrollToAnchor(`#exp-card-mobile-${idx}`);
+			return;
+		}
+		if (reducedMotion) {
+			scrollToAnchor(`#exp-card-desktop-${idx}`);
+			return;
+		}
+		if (!trackHostEl) return;
+		const rect = trackHostEl.getBoundingClientRect();
+		const elTop = window.scrollY + rect.top;
+		const vh = window.innerHeight;
+		const targetProgress = [0.29, 0.505, 0.72][idx] ?? 0.29;
+		const targetScrollY = elTop - vh + targetProgress * (vh + rect.height);
+		scrollToPosition(targetScrollY);
 	}
 </script>
 
 <section
 	id="experience"
 	aria-labelledby="experience-heading"
-	class="scroll-mt-16 bg-paper py-16 sm:py-24"
+	class="relative scroll-mt-24 bg-daylight-subtle py-20 text-ink sm:scroll-mt-28 sm:py-24"
 >
-	<div class="mx-auto max-w-[1360px] px-4 sm:px-8 lg:px-12">
-		<div use:hairline class="hairline-rule mb-12 h-px w-full bg-sand sm:mb-16" aria-hidden="true"></div>
-
-		<div class="grid grid-cols-1 gap-8 pb-10 sm:pb-14 lg:grid-cols-12 lg:items-end">
+	<div class="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-10">
+		<div class="grid grid-cols-1 gap-6 pb-10 lg:grid-cols-12 lg:items-end">
 			<div class="lg:col-span-7">
 				<h2
 					id="experience-heading"
-					class="font-display text-[clamp(2.4rem,4.8vw,4rem)] leading-[1.02] tracking-[-0.02em] text-balance text-charcoal"
+					class="text-[clamp(2.4rem,5vw,4.25rem)] leading-[0.96] font-bold tracking-[-0.04em] text-balance text-ink"
 				>
-					Seven days, shaped around three rhythms.
+					Seven days, three shared rhythms.
 				</h2>
 			</div>
 			<div class="lg:col-span-5">
-				<p class="max-w-[44ch] text-base leading-relaxed text-charcoal-muted">
-					The week is deliberately uncrowded—clear focus hours when you need to ship, open
-					afternoons for the island, and evenings that stay social without feeling scripted.
+				<p class="hidden text-base leading-relaxed text-ink-muted lg:block">
+					Scroll sideways across the week—focused remote hours, volcanic island afternoons, and
+					communal evenings built around the community.
+				</p>
+				<p class="text-base leading-relaxed text-ink-muted lg:hidden">
+					Three shared rhythms across the week—focused remote hours, volcanic island afternoons,
+					and communal evenings built around the community.
 				</p>
 
-				<div
-					role="group"
-					aria-label="Jump to experience chapter"
-					class="mt-6 flex flex-wrap gap-2 border-t border-sand pt-4"
-				>
-					{#each EXPERIENCE_CHAPTERS as chapter (chapter.id)}
+				<div role="group" aria-label="Select experience chapter" class="mt-5 flex flex-wrap gap-2">
+					{#each chapterNames as name, idx (name)}
 						<button
 							type="button"
-							onclick={() => jumpToChapter(chapter.id)}
-							aria-pressed={activeChapter === chapter.id}
+							onclick={() => selectChapter(idx)}
+							aria-pressed={activeIndex === idx}
 							class={[
-								'min-h-[44px] border px-3.5 py-2 font-mono text-[11px] tracking-[0.06em] uppercase transition-colors',
-								activeChapter === chapter.id
-									? 'border-charcoal bg-charcoal text-paper'
-									: 'border-sand bg-transparent text-charcoal-muted hover:border-charcoal hover:text-charcoal'
+								'min-h-[44px] rounded-full border px-4 py-2 font-mono text-[11px] font-medium tracking-[0.04em] uppercase transition-colors',
+								activeIndex === idx
+									? 'border-obsidian bg-obsidian text-daylight'
+									: 'border-line-dark bg-daylight-card text-ink-muted hover:border-ink hover:text-ink'
 							]}
 						>
-							{chapter.numeral} · {chapter.title.replace('.', '')}
+							0{idx + 1} · {name}
 						</button>
 					{/each}
 				</div>
 			</div>
 		</div>
+	</div>
 
-		<!-- Chapter I: Work together -->
-		<article
-			id={workChapter.id}
-			class="grid scroll-mt-20 grid-cols-1 gap-8 border-t border-sand py-12 sm:py-16 lg:grid-cols-12 lg:gap-12"
-		>
-			<div class="hidden lg:col-span-2 lg:block">
-				<span class="font-mono text-xs tracking-[0.08em] text-volcanic-deep uppercase">
-					Chapter {workChapter.numeral}
-				</span>
+	<!-- Desktop Locomotive CSS-Progress Horizontal Track -->
+	<div
+		bind:this={trackHostEl}
+		data-scroll
+		data-scroll-css-progress
+		class="loco-sticky-host hidden lg:block lg:h-[185vh]"
+	>
+		<div class="loco-sticky-frame sticky top-24 overflow-hidden py-4">
+			<div class="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 select-none overflow-hidden whitespace-nowrap font-bold text-[12vw] leading-none tracking-[-0.04em] text-ink/[0.045] uppercase" aria-hidden="true">
+				WORK · EXPLORE · MEMORIES · GRAN CANARIA ·
 			</div>
 
-			<div class="lg:col-span-5">
-				<h3 class="font-display text-[clamp(2rem,3.4vw,3rem)] leading-[1.04] tracking-[-0.015em] text-charcoal">
-					{workChapter.title}
-				</h3>
-				<p class="mt-2 font-mono text-xs tracking-[0.08em] text-volcanic-deep uppercase lg:hidden">
-					Chapter {workChapter.numeral}
-				</p>
-				<p class="mt-4 max-w-[46ch] text-lg leading-relaxed text-charcoal">
-					{workChapter.lead}
-				</p>
-				<p class="mt-4 max-w-[52ch] text-base leading-[1.7] text-charcoal-muted">
-					{workChapter.body}
-				</p>
-			</div>
+			<div class="loco-horizontal-track relative z-10 flex gap-8 px-10">
+				<!-- Card 1: Work together -->
+				<article
+					id="exp-card-desktop-0"
+					class={[
+						'flex w-[740px] shrink-0 flex-col justify-between rounded-3xl border bg-daylight-card p-10 transition-colors duration-300',
+						activeIndex === 0 ? 'border-coral' : 'border-line-dark'
+					]}
+				>
+					<div>
+						<div class="flex items-center justify-between">
+							<h3 class="text-4xl font-bold tracking-[-0.03em] text-ink">{workChapter.title}</h3>
+							<span class="font-mono text-xs text-ink-muted">01 / WORK</span>
+						</div>
+						<p class="mt-5 text-lg leading-relaxed font-medium text-ink">
+							{workChapter.lead}
+						</p>
+						<p class="mt-3 text-base leading-relaxed text-ink-muted">
+							{workChapter.body}
+						</p>
+					</div>
 
-			<div class="flex flex-col justify-between border border-sand bg-paper-elevated p-6 sm:p-8 lg:col-span-5">
-				<div>
-					<p class="font-mono text-[11px] tracking-[0.08em] text-volcanic-deep uppercase">
-						Coworking Direction (Interest Survey)
-					</p>
-					<ul class="mt-5 divide-y divide-sand/80">
-						{#each workChapter.rhythmItems as item (item)}
-							<li class="py-3.5 text-sm leading-relaxed text-charcoal first:pt-0 last:pb-0">
-								{item}
-							</li>
-						{/each}
-					</ul>
+					<div class="mt-8 grid grid-cols-1 gap-4 border-t border-line-dark pt-6">
+						<ul class="space-y-2 font-mono text-xs text-ink">
+							{#each workChapter.rhythmItems as item (item)}
+								<li>— {item}</li>
+							{/each}
+						</ul>
+						<p class="rounded-xl border border-dashed border-ink/25 bg-daylight px-4 py-3 font-mono text-[11px] text-ink-muted">
+							Placeholder: interior coworking photos &amp; Wi-Fi specs will be shared once the
+							villa is confirmed.
+						</p>
+					</div>
+				</article>
+
+				<!-- Card 2: Explore together -->
+				<article
+					id="exp-card-desktop-1"
+					class={[
+						'grid w-[820px] shrink-0 grid-cols-12 gap-8 rounded-3xl border bg-obsidian p-10 text-daylight transition-colors duration-300',
+						activeIndex === 1 ? 'border-coral' : 'border-white/10'
+					]}
+				>
+					<div class="col-span-6 flex flex-col justify-between">
+						<div>
+							<div class="flex items-center justify-between">
+								<h3 class="text-4xl font-bold tracking-[-0.03em] text-daylight">
+									{exploreChapter.title}
+								</h3>
+								<span class="font-mono text-xs text-mist">02 / ISLAND</span>
+							</div>
+							<p class="mt-5 text-lg leading-relaxed text-daylight/95">
+								{exploreChapter.lead}
+							</p>
+							<p class="mt-3 text-sm leading-relaxed text-mist">
+								{exploreChapter.body}
+							</p>
+						</div>
+
+						<ul class="mt-6 space-y-2 border-t border-white/15 pt-5 font-mono text-xs text-mist">
+							{#each exploreChapter.rhythmItems as item (item)}
+								<li>— {item}</li>
+							{/each}
+						</ul>
+					</div>
+
+					<figure class="col-span-6 flex flex-col justify-between">
+						<div class="aspect-[4/5] overflow-hidden rounded-2xl bg-obsidian-elevated">
+							<enhanced:img
+								src={roqueNubloPhoto}
+								alt="Volcanic rock monoliths of Roque Nublo rising above Canary pine forest"
+								sizes="400px"
+								loading="lazy"
+								class="h-full w-full object-cover"
+							/>
+						</div>
+						<figcaption class="mt-3 font-mono text-[11px] text-mist">
+							Roque Nublo highlands · Gran Canaria
+						</figcaption>
+					</figure>
+				</article>
+
+				<!-- Card 3: Make memories together -->
+				<article
+					id="exp-card-desktop-2"
+					class={[
+						'grid w-[820px] shrink-0 grid-cols-12 gap-8 rounded-3xl border bg-daylight-card p-10 transition-colors duration-300',
+						activeIndex === 2 ? 'border-coral' : 'border-line-dark'
+					]}
+				>
+					<figure class="col-span-6 flex flex-col justify-between">
+						<div class="aspect-[4/5] overflow-hidden rounded-2xl bg-obsidian">
+							<enhanced:img
+								src={tejedaSunsetPhoto}
+								alt="Amber sunset across Caldera de Tejeda mountain ridges in Gran Canaria"
+								sizes="400px"
+								loading="lazy"
+								class="h-full w-full object-cover"
+							/>
+						</div>
+						<figcaption class="mt-3 font-mono text-[11px] text-ink-muted">
+							Dusk over Caldera de Tejeda · Gran Canaria
+						</figcaption>
+					</figure>
+
+					<div class="col-span-6 flex flex-col justify-between">
+						<div>
+							<div class="flex items-center justify-between">
+								<h3 class="text-4xl font-bold tracking-[-0.03em] text-ink">
+									{memoriesChapter.title}
+								</h3>
+								<span class="font-mono text-xs text-ink-muted">03 / EVENINGS</span>
+							</div>
+							<p class="mt-5 text-lg leading-relaxed font-medium text-ink">
+								{memoriesChapter.lead}
+							</p>
+							<p class="mt-3 text-sm leading-relaxed text-ink-muted">
+								{memoriesChapter.body}
+							</p>
+						</div>
+
+						<ul class="mt-6 space-y-2 border-t border-line-dark pt-5 font-mono text-xs text-ink-muted">
+							{#each memoriesChapter.rhythmItems as item (item)}
+								<li>— {item}</li>
+							{/each}
+						</ul>
+					</div>
+				</article>
+			</div>
+		</div>
+	</div>
+
+	<!-- Mobile Vertical Stack (<lg) -->
+	<div class="mx-auto max-w-[1320px] space-y-6 px-4 sm:px-6 lg:hidden">
+		<article id="exp-card-mobile-0" class="scroll-mt-24 rounded-2xl border border-line-dark bg-daylight-card p-6">
+			<h3 class="text-2xl font-bold tracking-[-0.03em] text-ink">{workChapter.title}</h3>
+			<p class="mt-1 font-mono text-[11px] text-ink-muted uppercase">01 / Work</p>
+			<p class="mt-4 text-base leading-relaxed font-medium text-ink">{workChapter.lead}</p>
+			<p class="mt-2 text-sm leading-relaxed text-ink-muted">{workChapter.body}</p>
+			<ul class="mt-4 space-y-1.5 border-t border-line-dark pt-4 font-mono text-xs text-ink">
+				{#each workChapter.rhythmItems as item (item)}
+					<li>— {item}</li>
+				{/each}
+			</ul>
+			<p class="mt-4 rounded-xl border border-dashed border-ink/25 bg-daylight px-4 py-3 font-mono text-[11px] text-ink-muted">
+				Placeholder: interior coworking photos &amp; Wi-Fi specs will be shared once the villa is
+				confirmed.
+			</p>
+		</article>
+
+		<article id="exp-card-mobile-1" class="scroll-mt-24 rounded-2xl bg-obsidian p-6 text-daylight">
+			<h3 class="text-2xl font-bold tracking-[-0.03em] text-daylight">{exploreChapter.title}</h3>
+			<p class="mt-1 font-mono text-[11px] text-mist uppercase">02 / Island</p>
+			<figure class="mt-4">
+				<div class="aspect-[4/3] overflow-hidden rounded-xl">
+					<enhanced:img
+						src={roqueNubloPhoto}
+						alt="Volcanic rock monoliths of Roque Nublo rising above Canary pine forest"
+						sizes="92vw"
+						loading="lazy"
+						class="h-full w-full object-cover"
+					/>
 				</div>
-
-				<p class="mt-6 border-t border-sand pt-4 font-mono text-[11px] leading-relaxed text-charcoal-muted">
-					Placeholder notice: interior coworking photos and bandwidth tests will be added once a
-					property is confirmed.
-				</p>
-			</div>
+				<figcaption class="mt-2 font-mono text-[11px] text-mist">
+					Roque Nublo highlands · Gran Canaria
+				</figcaption>
+			</figure>
+			<p class="mt-4 text-base leading-relaxed text-daylight">{exploreChapter.lead}</p>
+			<p class="mt-2 text-sm leading-relaxed text-mist">{exploreChapter.body}</p>
+			<ul class="mt-4 space-y-1.5 border-t border-white/15 pt-4 font-mono text-xs text-mist">
+				{#each exploreChapter.rhythmItems as item (item)}
+					<li>— {item}</li>
+				{/each}
+			</ul>
 		</article>
 
-		<!-- Chapter II: Explore together -->
-		<article
-			id={exploreChapter.id}
-			class="grid scroll-mt-20 grid-cols-1 gap-8 border-t border-sand py-12 sm:py-16 lg:grid-cols-12 lg:gap-12"
-		>
-			<div class="hidden lg:col-span-2 lg:block">
-				<span class="font-mono text-xs tracking-[0.08em] text-volcanic-deep uppercase">
-					Chapter {exploreChapter.numeral}
-				</span>
-			</div>
-
-			<div class="lg:col-span-4">
-				<h3 class="font-display text-[clamp(2rem,3.4vw,3rem)] leading-[1.04] tracking-[-0.015em] text-charcoal">
-					{exploreChapter.title}
-				</h3>
-				<p class="mt-2 font-mono text-xs tracking-[0.08em] text-volcanic-deep uppercase lg:hidden">
-					Chapter {exploreChapter.numeral}
-				</p>
-				<p class="mt-4 max-w-[42ch] text-lg leading-relaxed text-charcoal">
-					{exploreChapter.lead}
-				</p>
-				<p class="mt-4 max-w-[46ch] text-base leading-[1.7] text-charcoal-muted">
-					{exploreChapter.body}
-				</p>
-				<ul class="mt-6 space-y-2.5 border-t border-sand pt-5 font-mono text-xs text-charcoal-muted">
-					{#each exploreChapter.rhythmItems as item (item)}
-						<li>— {item}</li>
-					{/each}
-				</ul>
-			</div>
-
-			<div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:col-span-6">
-				<figure>
-					<div class="aspect-[4/3] overflow-hidden bg-paper-inset">
-						<enhanced:img
-							src={roqueNubloPhoto}
-							alt="Volcanic rock monoliths of Roque Nublo rising above Canary pine forest in Gran Canaria"
-							sizes="(min-width: 1024px) 24vw, (min-width: 640px) 45vw, 94vw"
-							loading="lazy"
-							class="h-full w-full object-cover transition-transform duration-700 hover:scale-[1.02]"
-						/>
-					</div>
-					<figcaption class="mt-2.5 font-mono text-[11px] tracking-[0.04em] text-charcoal-muted">
-						Roque Nublo highlands · Gran Canaria
-					</figcaption>
-				</figure>
-
-				<figure class="sm:mt-10">
-					<div class="aspect-[4/3] overflow-hidden bg-paper-inset">
-						<enhanced:img
-							src={tamadabaCliffsPhoto}
-							alt="Steep volcanic cliffs of Tamadaba dropping directly into the Atlantic Ocean"
-							sizes="(min-width: 1024px) 24vw, (min-width: 640px) 45vw, 94vw"
-							loading="lazy"
-							class="h-full w-full object-cover transition-transform duration-700 hover:scale-[1.02]"
-						/>
-					</div>
-					<figcaption class="mt-2.5 font-mono text-[11px] tracking-[0.04em] text-charcoal-muted">
-						Tamadaba sea cliffs · Northwest coast
-					</figcaption>
-				</figure>
-			</div>
-		</article>
-
-		<!-- Chapter III: Make memories together -->
-		<article
-			id={memoriesChapter.id}
-			class="grid scroll-mt-20 grid-cols-1 gap-8 border-t border-sand pt-12 sm:pt-16 lg:grid-cols-12 lg:gap-12"
-		>
-			<div class="hidden lg:col-span-2 lg:block">
-				<span class="font-mono text-xs tracking-[0.08em] text-volcanic-deep uppercase">
-					Chapter {memoriesChapter.numeral}
-				</span>
-			</div>
-
-			<div class="order-2 lg:order-2 lg:col-span-5">
-				<figure>
-					<div class="aspect-[3/2] overflow-hidden bg-charcoal">
-						<enhanced:img
-							src={tejedaSunsetPhoto}
-							alt="Amber and clay sunset sky above the Caldera de Tejeda mountain ridges in Gran Canaria"
-							sizes="(min-width: 1024px) 38vw, 94vw"
-							loading="lazy"
-							class="h-full w-full object-cover transition-transform duration-700 hover:scale-[1.02]"
-						/>
-					</div>
-					<figcaption class="mt-2.5 font-mono text-[11px] tracking-[0.04em] text-charcoal-muted">
-						Dusk over Caldera de Tejeda · Gran Canaria
-					</figcaption>
-				</figure>
-			</div>
-
-			<div class="order-1 lg:order-3 lg:col-span-5">
-				<h3 class="font-display text-[clamp(2rem,3.4vw,3rem)] leading-[1.04] tracking-[-0.015em] text-charcoal">
-					{memoriesChapter.title}
-				</h3>
-				<p class="mt-2 font-mono text-xs tracking-[0.08em] text-volcanic-deep uppercase lg:hidden">
-					Chapter {memoriesChapter.numeral}
-				</p>
-				<p class="mt-4 max-w-[44ch] text-lg leading-relaxed text-charcoal">
-					{memoriesChapter.lead}
-				</p>
-				<p class="mt-4 max-w-[48ch] text-base leading-[1.7] text-charcoal-muted">
-					{memoriesChapter.body}
-				</p>
-				<ul class="mt-6 space-y-2.5 border-t border-sand pt-5 font-mono text-xs text-charcoal-muted">
-					{#each memoriesChapter.rhythmItems as item (item)}
-						<li>— {item}</li>
-					{/each}
-				</ul>
-			</div>
+		<article id="exp-card-mobile-2" class="scroll-mt-24 rounded-2xl border border-line-dark bg-daylight-card p-6">
+			<h3 class="text-2xl font-bold tracking-[-0.03em] text-ink">{memoriesChapter.title}</h3>
+			<p class="mt-1 font-mono text-[11px] text-ink-muted uppercase">03 / Evenings</p>
+			<figure class="mt-4">
+				<div class="aspect-[4/3] overflow-hidden rounded-xl">
+					<enhanced:img
+						src={tejedaSunsetPhoto}
+						alt="Amber sunset across Caldera de Tejeda mountain ridges in Gran Canaria"
+						sizes="92vw"
+						loading="lazy"
+						class="h-full w-full object-cover"
+					/>
+				</div>
+				<figcaption class="mt-2 font-mono text-[11px] text-ink-muted">
+					Dusk over Caldera de Tejeda · Gran Canaria
+				</figcaption>
+			</figure>
+			<p class="mt-4 text-base leading-relaxed font-medium text-ink">{memoriesChapter.lead}</p>
+			<p class="mt-2 text-sm leading-relaxed text-ink-muted">{memoriesChapter.body}</p>
+			<ul class="mt-4 space-y-1.5 border-t border-line-dark pt-4 font-mono text-xs text-ink-muted">
+				{#each memoriesChapter.rhythmItems as item (item)}
+					<li>— {item}</li>
+				{/each}
+			</ul>
 		</article>
 	</div>
 </section>

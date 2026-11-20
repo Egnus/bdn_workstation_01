@@ -80,7 +80,7 @@ export const PROVISIONAL_DETAILS: DetailRow[] = [
 	{
 		label: 'Duration',
 		value: '7 days / 6 nights',
-		note: 'A full Monday-to-weekend rhythm balancing remote work and island time.'
+		note: 'Seven consecutive island days balancing remote work and island time.'
 	},
 	{
 		label: 'Working capacity',

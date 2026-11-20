@@ -4,106 +4,98 @@
 	import { FORM_URL, WORKATION_META } from '#lib/data/workation';
 </script>
 
-<section id="top" aria-labelledby="hero-heading" class="relative bg-paper pb-16 sm:pb-24">
-	<div class="relative h-[46svh] min-h-[300px] w-full overflow-hidden bg-charcoal sm:h-[58svh] sm:min-h-[420px]">
+<section
+	id="top"
+	aria-labelledby="hero-heading"
+	class="relative flex min-h-[100svh] items-end overflow-hidden bg-obsidian pt-24 pb-8 text-daylight sm:pb-12"
+>
+	<div
+		data-scroll
+		data-scroll-css-progress
+		class="loco-hero-media pointer-events-none absolute inset-0"
+	>
 		<enhanced:img
 			src={agaetePhoto}
 			alt="Sunlit whitewashed village of Agaete nestled below green volcanic peaks in Gran Canaria"
 			sizes="100vw"
 			fetchpriority="high"
-			class="h-full w-full object-cover object-[50%_45%]"
+			class="h-full w-full object-cover object-[50%_42%]"
 		/>
 		<div
-			class="pointer-events-none absolute inset-0 bg-gradient-to-b from-charcoal/10 via-transparent to-charcoal/35"
+			class="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/70 to-obsidian/35"
 			aria-hidden="true"
 		></div>
-		<p
-			class="absolute right-4 bottom-24 hidden bg-charcoal/80 px-2.5 py-1 font-mono text-[11px] tracking-[0.06em] text-paper uppercase sm:right-8 sm:bottom-28 sm:block lg:right-12"
-		>
-			Agaete Valley, Gran Canaria · BDN Survey Reference
-		</p>
 	</div>
 
-	<div class="mx-auto max-w-[1360px] px-4 sm:px-8 lg:px-12">
-		<div
-			class="relative z-10 -mt-16 border border-sand bg-paper px-5 pt-7 pb-8 sm:-mt-24 sm:px-10 sm:pt-11 sm:pb-12 lg:grid lg:grid-cols-12 lg:gap-10"
-		>
-			<div class="lg:col-span-8">
+	<div class="relative z-10 mx-auto w-full max-w-[1320px] px-4 sm:px-6 lg:px-10">
+		<div class="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-end">
+			<div class="lg:col-span-7">
 				<h1
 					id="hero-heading"
-					class="font-display text-[clamp(2.85rem,6.3vw,5.4rem)] leading-[0.96] tracking-[-0.025em] text-balance text-charcoal"
+					class="text-[clamp(2.9rem,7.2vw,6rem)] leading-[0.94] font-bold tracking-[-0.04em] text-balance text-daylight"
 				>
-					Work somewhere else.<br />
-					<span class="italic">Connect differently.</span>
+					Work somewhere else. Connect differently.
 				</h1>
-			</div>
 
-			<div class="mt-6 flex flex-col justify-between gap-6 lg:col-span-4 lg:mt-1">
-				<p class="max-w-[38ch] text-base leading-relaxed text-charcoal-muted">
-					Seven days with the Barcelona Digital Nomads community in Gran Canaria—focused remote
-					workdays, island exploration, and unhurried evenings together.
+				<p class="mt-5 max-w-[46ch] text-base leading-relaxed text-daylight sm:text-lg">
+					Seven days in Gran Canaria with the Barcelona Digital Nomads community—shared mornings
+					at the villa, island afternoons, and unhurried evenings together.
 				</p>
-
-				<div>
-					<a
-						href={FORM_URL}
-						target="_blank"
-						rel="noopener noreferrer"
-						class="inline-flex min-h-[48px] w-full items-center justify-center gap-2 bg-clay px-6 py-3.5 font-mono text-xs font-medium tracking-[0.08em] text-charcoal uppercase transition-colors hover:bg-clay-hover sm:w-auto"
-					>
-						<span>Express Your Interest</span>
-						<ArrowUpRight class="size-4" aria-hidden="true" />
-					</a>
-					<p class="mt-2.5 font-mono text-[11px] tracking-[0.03em] text-charcoal-muted">
-						3-minute interest survey · No booking or deposit required
-					</p>
-				</div>
 			</div>
 
-			<dl
-				class="mt-8 grid grid-cols-2 gap-x-6 gap-y-4 border-t border-sand pt-5 sm:grid-cols-5 lg:col-span-12"
-			>
-				<div>
-					<dt class="font-mono text-[11px] tracking-[0.08em] text-charcoal-muted uppercase">
-						Edition
-					</dt>
-					<dd class="mt-1 font-mono text-xs font-medium text-charcoal sm:text-sm">
-						{WORKATION_META.code}
-					</dd>
+			<div class="lg:col-span-5">
+				<div class="rounded-2xl border border-white/15 bg-obsidian/78 p-5 backdrop-blur-md sm:p-6">
+					<dl class="grid grid-cols-2 gap-x-5 gap-y-4 border-b border-white/15 pb-5">
+						<div>
+							<dt class="font-mono text-[11px] tracking-[0.06em] text-mist uppercase">
+								Edition &amp; Place
+							</dt>
+							<dd class="mt-1 text-sm font-medium text-daylight">
+								{WORKATION_META.code} · Gran Canaria
+							</dd>
+						</div>
+						<div>
+							<dt class="font-mono text-[11px] tracking-[0.06em] text-mist uppercase">
+								Proposed Dates
+							</dt>
+							<dd class="mt-1 font-mono text-sm font-medium text-daylight tabular-nums">
+								{WORKATION_META.dates}
+							</dd>
+						</div>
+						<div>
+							<dt class="font-mono text-[11px] tracking-[0.06em] text-mist uppercase">
+								Duration
+							</dt>
+							<dd class="mt-1 text-sm font-medium text-daylight">
+								{WORKATION_META.duration}
+							</dd>
+						</div>
+						<div>
+							<dt class="font-mono text-[11px] tracking-[0.06em] text-mist uppercase">
+								Group Size
+							</dt>
+							<dd class="mt-1 text-sm font-medium text-daylight">
+								~40 people <span class="text-xs text-mist">(provisional)</span>
+							</dd>
+						</div>
+					</dl>
+
+					<div class="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+						<a
+							href={FORM_URL}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-full bg-coral px-6 py-3 font-mono text-xs font-medium tracking-[0.06em] text-obsidian uppercase transition-colors hover:bg-coral-hover sm:w-auto"
+						>
+							<span>Express Your Interest</span>
+							<ArrowUpRight class="size-4" aria-hidden="true" />
+						</a>
+						<span class="font-mono text-[11px] text-mist">
+							No booking or deposit now
+						</span>
+					</div>
 				</div>
-				<div>
-					<dt class="font-mono text-[11px] tracking-[0.08em] text-charcoal-muted uppercase">
-						Destination
-					</dt>
-					<dd class="mt-1 font-mono text-xs font-medium text-charcoal sm:text-sm">
-						{WORKATION_META.destination}
-					</dd>
-				</div>
-				<div>
-					<dt class="font-mono text-[11px] tracking-[0.08em] text-charcoal-muted uppercase">
-						Proposed Dates
-					</dt>
-					<dd class="mt-1 font-mono text-xs font-medium text-charcoal tabular-nums sm:text-sm">
-						{WORKATION_META.dates}
-					</dd>
-				</div>
-				<div>
-					<dt class="font-mono text-[11px] tracking-[0.08em] text-charcoal-muted uppercase">
-						Duration
-					</dt>
-					<dd class="mt-1 font-mono text-xs font-medium text-charcoal sm:text-sm">
-						{WORKATION_META.duration}
-					</dd>
-				</div>
-				<div class="col-span-2 sm:col-span-1">
-					<dt class="font-mono text-[11px] tracking-[0.08em] text-charcoal-muted uppercase">
-						Group Size
-					</dt>
-					<dd class="mt-1 font-mono text-xs font-medium text-charcoal sm:text-sm">
-						~40 people <span class="text-charcoal-muted">(provisional)</span>
-					</dd>
-				</div>
-			</dl>
+			</div>
 		</div>
 	</div>
 </section>
