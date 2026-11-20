@@ -8,11 +8,27 @@
 	import DetailsLedger from '#lib/components/DetailsLedger.svelte';
 	import FinalCta from '#lib/components/FinalCta.svelte';
 	import { setLocomotiveInstance } from '#lib/actions/reveal';
-	import ogPreview from '#lib/assets/photos/agaete-gran-canaria.jpg';
+	import {
+		OG_IMAGE_ALT,
+		OG_IMAGE_HEIGHT,
+		OG_IMAGE_PATH,
+		OG_IMAGE_WIDTH,
+		SITE_DESCRIPTION,
+		SITE_KEYWORDS,
+		SITE_NAME,
+		SITE_TITLE,
+		buildAbsoluteUrl,
+		buildStructuredDataJson
+	} from '#lib/seo';
+	import type { PageProps } from './$types';
 
-	const title = 'BDN Workation 001 — Gran Canaria (24–30 January 2027)';
-	const description =
-		'Seven days of remote work, volcanic island exploration, and community with Barcelona Digital Nomads in Gran Canaria. Express your interest for January 2027.';
+	let { data }: PageProps = $props();
+
+	let canonicalUrl = $derived(buildAbsoluteUrl(data.siteOrigin, '/'));
+	let ogImageUrl = $derived(buildAbsoluteUrl(data.siteOrigin, OG_IMAGE_PATH));
+	let jsonLdScript = $derived(
+		`<script type="application/ld+json">${buildStructuredDataJson(data.siteOrigin)}</` + `script>`
+	);
 
 	$effect(() => {
 		if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -37,16 +53,37 @@
 </script>
 
 <svelte:head>
-	<title>{title}</title>
-	<meta name="description" content={description} />
+	<title>{SITE_TITLE}</title>
+	<meta name="description" content={SITE_DESCRIPTION} />
+	<meta name="keywords" content={SITE_KEYWORDS} />
+	<meta name="author" content={SITE_NAME} />
+	<link rel="canonical" href={canonicalUrl} />
+	<link rel="alternate" hreflang="en" href={canonicalUrl} />
+	<link rel="alternate" hreflang="x-default" href={canonicalUrl} />
+
 	<meta property="og:type" content="website" />
-	<meta property="og:title" content={title} />
-	<meta property="og:description" content={description} />
-	<meta property="og:image" content={ogPreview} />
+	<meta property="og:site_name" content={SITE_NAME} />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:url" content={canonicalUrl} />
+	<meta property="og:title" content={SITE_TITLE} />
+	<meta property="og:description" content={SITE_DESCRIPTION} />
+	<meta property="og:image" content={ogImageUrl} />
+	{#if ogImageUrl.startsWith('https://')}
+		<meta property="og:image:secure_url" content={ogImageUrl} />
+	{/if}
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta property="og:image:width" content={String(OG_IMAGE_WIDTH)} />
+	<meta property="og:image:height" content={String(OG_IMAGE_HEIGHT)} />
+	<meta property="og:image:alt" content={OG_IMAGE_ALT} />
+
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content={title} />
-	<meta name="twitter:description" content={description} />
-	<meta name="twitter:image" content={ogPreview} />
+	<meta name="twitter:url" content={canonicalUrl} />
+	<meta name="twitter:title" content={SITE_TITLE} />
+	<meta name="twitter:description" content={SITE_DESCRIPTION} />
+	<meta name="twitter:image" content={ogImageUrl} />
+	<meta name="twitter:image:alt" content={OG_IMAGE_ALT} />
+
+	{@html jsonLdScript}
 </svelte:head>
 
 <SiteHeader />

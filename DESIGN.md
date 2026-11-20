@@ -150,13 +150,13 @@ Two self-hosted local font families bundled via `@fontsource`:
 
 ## Component Inventory
 
-1. **`SiteHeader.svelte`**: Fixed floating dark pill capsule (`01` coral circle + responsive single-line brand `"BDN Workation"` / `"Barcelona Digital Nomads"` + active-section indicator + `Express Interest` coral pill + mobile drawer).
+1. **`SiteHeader.svelte`**: Fixed floating dark pill capsule (official `bdn-logo.png` + `01` coral circle + responsive `"Workation · Gran Canaria"` label + active-section indicator + `Express Interest` coral pill + mobile drawer).
 2. **`HeroCover.svelte`**: Full-height `100svh` parallax Agaete Valley photograph, `-0.04em` headline, and frosted metadata summary card.
 3. **`IdeaSection.svelte`**: Centered manifesto flanked by 4 satellite Gran Canaria frames (2-column grid on `<lg`) plus dashed villa scouting placeholder.
 4. **`ExperienceChapters.svelte`**: Sticky `lg:h-[185vh]` horizontal 3-card deck (`01 / WORK`, dark `02 / ISLAND`, white `03 / EVENINGS`) collapsing to clean vertical stack below `lg`.
 5. **`DestinationGallery.svelte`**: Interactive 4-plate island gallery (`Vegueta`, `Agaete`, `Tamadaba`, `Las Canteras`) with active coral frame highlighting and `.loco-scale-img` subtle scroll zoom.
 6. **`DetailsLedger.svelte`**: Sticky rounded-top obsidian curtain opening above `#details` with `lg:sticky` intro + non-binding survey notice and `1px` hairline provisional ledger (`€599` / `€749`).
-7. **`FinalCta.svelte`**: Two-tone white/coral closing statement (`"Good people. New places. Different perspectives."`), primary pill CTA, footer credits, and `IntersectionObserver`-guarded mobile bottom bar.
+7. **`FinalCta.svelte`**: Two-tone white/coral closing statement (`"Good people. New places. Different perspectives."`), primary pill CTA, footer brand lockup with official `bdn-logo.png` & credits, and `IntersectionObserver`-guarded mobile bottom bar.
 
 ## Patterns & Constraints
 

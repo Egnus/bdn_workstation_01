@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { ArrowUpRight } from '@lucide/svelte';
+	import bdnLogo from '#lib/assets/bdn-logo.png';
 	import { scrollToAnchor } from '#lib/actions/reveal';
 	import { FORM_URL, NAV_LINKS } from '#lib/data/workation';
 
@@ -78,13 +79,30 @@
 	<footer class="border-t border-white/15 pb-12 text-mist">
 		<div class="mx-auto max-w-[1320px] px-4 pt-10 sm:px-6 lg:px-10">
 			<div class="flex flex-col justify-between gap-6 border-b border-white/15 pb-8 md:flex-row md:items-center">
-				<div>
-					<p class="text-xl font-semibold tracking-[-0.02em] text-daylight">
-						Barcelona Digital Nomads
-					</p>
-					<p class="mt-1 font-mono text-xs tracking-[0.05em] text-mist uppercase">
-						BDN Workation 001 · Gran Canaria · Proposed 24–30 January 2027
-					</p>
+				<div class="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-5">
+					<a
+						href="#top"
+						onclick={(e) => handleFooterNav(e, '#top')}
+						class="inline-flex min-h-[44px] shrink-0 items-center transition-opacity hover:opacity-80"
+					>
+						<img
+							src={bdnLogo}
+							alt="Barcelona Digital Nomads — Back to top"
+							width="426"
+							height="210"
+							loading="lazy"
+							decoding="async"
+							class="h-11 w-auto sm:h-12"
+						/>
+					</a>
+					<div class="sm:border-l sm:border-white/15 sm:pl-5">
+						<p class="text-lg font-semibold tracking-[-0.02em] text-daylight sm:text-xl">
+							Barcelona Digital Nomads
+						</p>
+						<p class="mt-0.5 font-mono text-xs tracking-[0.05em] text-mist uppercase">
+							BDN Workation 001 · Gran Canaria · Proposed 24–30 January 2027
+						</p>
+					</div>
 				</div>
 
 				<nav aria-label="Footer navigation" class="flex flex-wrap gap-x-6 gap-y-2">

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { ArrowDown, ArrowUpRight, Menu, X } from '@lucide/svelte';
+	import bdnLogo from '#lib/assets/bdn-logo.png';
 	import { scrollToAnchor } from '#lib/actions/reveal';
 	import { FORM_URL, NAV_LINKS } from '#lib/data/workation';
 
@@ -59,16 +60,30 @@
 		<a
 			href="#top"
 			onclick={(e) => handleNav(e, '#top')}
-			class="inline-flex min-h-[44px] shrink-0 items-center gap-2.5 text-daylight no-underline transition-opacity hover:opacity-80"
+			class="inline-flex min-h-[44px] shrink-0 items-center gap-2.5 text-daylight no-underline transition-opacity hover:opacity-80 sm:gap-3"
 		>
-			<span class="inline-flex size-7 shrink-0 items-center justify-center rounded-full bg-coral font-mono text-[11px] font-medium text-obsidian">
-				01
-			</span>
-			<span class="whitespace-nowrap text-sm font-semibold tracking-[-0.02em] xl:hidden">
-				BDN Workation
-			</span>
-			<span class="hidden whitespace-nowrap text-sm font-semibold tracking-[-0.02em] xl:inline xl:text-base">
-				Barcelona Digital Nomads
+			<img
+				src={bdnLogo}
+				alt="Barcelona Digital Nomads"
+				width="426"
+				height="210"
+				decoding="async"
+				class="h-7 w-auto shrink-0 sm:h-8"
+			/>
+			<span class="hidden h-4 w-px bg-white/20 sm:inline-block" aria-hidden="true"></span>
+			<span class="inline-flex items-center gap-1.5 whitespace-nowrap">
+				<span
+					class="inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-coral font-mono text-[10px] font-semibold text-obsidian"
+					aria-hidden="true"
+				>
+					01
+				</span>
+				<span class="hidden text-sm font-semibold tracking-[-0.02em] sm:inline">
+					Workation
+				</span>
+				<span class="hidden font-mono text-xs tracking-[0.04em] text-mist uppercase xl:inline">
+					· Gran Canaria
+				</span>
 			</span>
 		</a>
 
